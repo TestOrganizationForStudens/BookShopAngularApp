@@ -1,0 +1,97 @@
+
+<style>
+  ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+     }
+
+  li {
+  float: left;
+  border-right:1px solid #bbb;
+  color: white;
+}
+
+
+
+
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 0px 14px;
+  text-decoration: none;
+
+   }
+
+ .pressingB :hover {
+
+  background-color: rgb(22, 125, 185);
+ 
+}
+.middle
+{
+    display: inline;
+    vertical-align: middle;
+
+}
+
+</style>
+
+
+<html>
+<body>
+
+ 
+  <ul>
+  <li>Home Page  </li>
+
+  <li>
+    <form #forSearch="ngForm" (ngSubmit)="searchengine(forSearch.value)">
+  <input type="text" name="search string" ngModel/>
+  <button type="submit">Search</button>
+  </form>
+  </li>
+<div class="pressingB">
+  <li style="float:right">
+<a   class="pressingB" routerLink="/login"  routerLinkActive="active" >  
+ login
+</a>
+  </li>
+
+<li style="float:right">
+<a   routerLink="/account" routerLinkActive="active">  
+ personal profile
+</a>
+</li>
+
+
+<li style="float:right">
+<a   routerLink="/cart">  
+Buying-cart
+</a>
+</li>
+</div>
+
+</ul>
+<br>
+
+
+<div class="middle">
+
+<img   width=50px height=50px  src="assets/back.png" (click)="changeImg2()"/>
+<img  id="mainimg" width=800px   height=500px class="center"  src="assets/download.jpg"/>
+<img  width=50px height=50px src="assets/next.png" (click)="changeImg()"/>
+
+</div>
+<div *ngFor="let product of products | async ">
+
+{{product |  json}} 
+
+</div>
+</body>
+</html>
+

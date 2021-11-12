@@ -1,0 +1,48 @@
+<style>
+
+.content
+{
+margin:auto;
+text-align:center;
+}
+
+
+</style>
+
+<div class="content">
+<h1 >login</h1>
+
+<form #login="ngForm" (ngSubmit) ="loginMethod(login.value)">
+<p>Username</p>
+<input type="text" name="Username" placeholder="username" ngModel />
+<br> <br>
+<p>Password</p>
+<input type="password" name="Password" placeholder="password" ngModel />
+
+<br> <br>
+ <input type="submit" value="submit"/>
+ <br> 
+
+</form>
+
+<br>
+<p > OR</p>
+<div>
+<img   height=50 width=50 padding=0px src="assets/facebook.jpg">
+<img height=50 width=50 padding=0px src="assets/twitter.webp">
+
+
+<img  height=50 width=50 padding=0px src="assets/gmail.png">
+
+
+
+</div>
+<br>
+<br>
+<a   loat="right" href="https://en.wikipedia.org/wiki/Password">Forgot password?</a>
+<br>
+<a routerLink="/sigin">
+    <input type="submit" value="sing in"/>
+</a>
+
+</div>
