@@ -6,16 +6,38 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
+
+
+
 export class HomeComponent  implements OnInit{
   constructor(private http:HttpClient) { }
    readonly URL='Access-Control-Allow-Origin:http://localhost:8080/api/product/';
    readonly URL2='https://jsonplaceholder.typicode.com/posts';
  products:any;
- 
-
 
  doImages()
  {
+  interface Book {
+    author: string,
+    country: string,
+    imageLink: string,
+    language: string,
+    link: string,
+    pages: number,
+    title: string,
+    year: number
+
+   
+  } 
+  
+  
+    this.http.get<Book[]>("assets/books/more_books/books.json").subscribe(data =>{
+     let books:Book[];
+     books=data;
+    //let  books=JSON.parse(data);
+    console.log(books);
+
     var workDiv=document.getElementById("productSpace");
     var sheet = document.createElement('style');
     sheet.innerHTML ="#productSpace{margin:auto}  #productSpace img {display: inline; vertical-align: middle;padding-right: 20px;padding-bottom: 20px;}";
@@ -44,7 +66,15 @@ export class HomeComponent  implements OnInit{
    "assets/books/images3.jpg",
    "assets/books/Ove.jpg",
    ];
-    
+    for(let book of books )
+    {
+     links.push(book["link"]);
+     sources.push(book["imageLink"]);
+
+    }
+
+
+
    for(var i = 0; i < sources.length; i++)
 {
 
@@ -78,13 +108,13 @@ export class HomeComponent  implements OnInit{
 
 
 
-     if(i%3==0 && i!=0)
+     if((i+1)%10==0)
      {
      var br = document.createElement("br");
      if(workDiv!=null)
      workDiv.appendChild(br);
      }
-
+    
 
     }
 
@@ -92,6 +122,9 @@ export class HomeComponent  implements OnInit{
    let someArray = [1, "string", false];
  for (let entry of someArray)
  console.log(entry);
+   });
+
+
 
  }
 
