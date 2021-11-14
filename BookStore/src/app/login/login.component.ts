@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { HttpClientModule,HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { sha256, sha224 } from 'js-sha256';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,47 +10,62 @@ import { sha256, sha224 } from 'js-sha256';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(private http:HttpClient) { }
-   readonly URL='http://localhost:8080/';
+  constructor(private http:HttpClient,private route:Router) { }
+   readonly URL='http://localhost:8080/api/user/';
 
   loginMethod(Item:any)
 {
-   console.log(Item["Password"]);
+   //console.log(Item["Password"]);
    let hashPass=sha256(Item["Password"]);
    console.log(hashPass);
 
+ 
+ this.http.get<any>(this.URL).subscribe(data=>{
+ let users=data;
+ let existsHere=false;
+ let existsHere2=false;
+ console.log(data);
+ for(let user of users){
+
+  if( user["email"]===Item["Username"])
+       existsHere=true;
+ }
+  if(existsHere)
+  {
+    for(let user of users){
+
+      if( user["password"]===Item["Password"])
+           existsHere2=true;
+     }
 
 
+  }
+  else
+   alert("emailul nu exista");
+
+  if(existsHere2)
+   this.route.navigate(['']);
+   else
+   alert("passwordul nu e corect");
+
+ });
+
+  
+
+  // this.route.navigate(['']);
 
  //this.http.post(this.URL);
 }
 facebookLogIn()
 {
-
-console.log("facebbok");
-var script = document.createElement('script');
-script.src="https://connect.facebook.net/ro_RO/sdk.js#xfbml=1&version=v12.0&appId=3220700794679869&autoLogAppEvents=1" ;
-script.crossOrigin='anonymous';
-script.async=true;
-script.defer=true;
-script.nonce="ZzlS31zN";
-document.body.append(script);
-//script.textContent=" FB.login(function(response){});";
-
-script.onload=function() {
-   
- 
-    alert("hello ba");
-
-
-};
-
-
-
-
-
+  
+  return new Promise<fb.StatusResponse>(resolve => FB.login(resolve));
 
 }
+
+
+
+
 twitterLogIn(){
 
   console.log("twitter");

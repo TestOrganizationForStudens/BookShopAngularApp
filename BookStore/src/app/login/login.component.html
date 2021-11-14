@@ -22,10 +22,10 @@ nonce="NprwB65B">
 
 <form #login="ngForm" (ngSubmit) ="loginMethod(login.value)">
 <p>Username</p>
-<input type="text" name="Username" placeholder="username" ngModel />
+<input type="text" name="Username" placeholder="username" ngModel   required/>
 <br> <br>
 <p>Password</p>
-<input type="password" name="Password" placeholder="password" ngModel />
+<input type="password" name="Password" placeholder="password" ngModel  required/>
 
 <br> <br>
  <input type="submit" value="submit"/>
