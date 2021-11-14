@@ -34,8 +34,18 @@ li a {
 }
 .middle
 {
-    display: inline;
-    vertical-align: middle;
+    display: inline-block;
+    width: 70%;
+
+   vertical-align: top;
+
+}
+#luckyImage
+{
+  display: inline-block;
+  width: 25%;
+  padding-right:150px;
+  float:top;
 
 }
 body
@@ -80,6 +90,7 @@ background-size: 100% 1.2em;
 </li>
 
 
+
 <li style="float:right">
 <a   routerLink="/cart">  
 Buying-cart
@@ -91,13 +102,48 @@ Buying-cart
 <br>
 
 
-<div class="middle">
 
-<img   width=50px height=50px  src="assets/back.png" (click)="changeImg2()"/>
-<img  id="mainimg" width=800px   height=500px class="center"  src="assets/download.jpg"/>
-<img  width=50px height=50px src="assets/next.png" (click)="changeImg()"/>
+<div style="float:right; padding-right:150px" id="getRandom"> >
+  <form  name="lucky_book" #Lucky="ngForm" (ngSubmit)=" getRandomImage()">
+  <button name="btn" type="submit">I am feeling lucky    </button>
+  </form>
+</div>
+<br>
+
+
+
+<div class="row">
+
+  
+ 
+           <div class="col">
+   
+   
+            <div id="mainPart" class="middle">
+
+              <img   width=50px height=50px  src="assets/back.png" (click)="changeImg2()"/>
+              <img  id="mainimg" width=700px   height=500px class="center"  src="assets/download.jpg"/>
+              <img  width=50px height=50px src="assets/next.png" (click)="changeImg()"/>
+
+            </div>
+
+
+             <a  id="linkTolucky">
+             <img id="luckyone">
+             </a>
+           
+
+
+
+         </div>
+
+
+
 
 </div>
+
+
+
 <div *ngFor="let product of products | async ">
 
 {{product |  json}} 
@@ -107,7 +153,7 @@ Buying-cart
 </div>
 <br><br>
 
- <div id="productSpace">
+ <div id="productSpace" style="padding-top:75px">
 
 </div>
 
