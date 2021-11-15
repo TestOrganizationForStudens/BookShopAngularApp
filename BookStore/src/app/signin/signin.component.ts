@@ -27,6 +27,13 @@ export class SigninComponent implements OnInit {
     var newPasCheck=sha256(Item["checkPassword"]);
     Item["newPassword"]=newPas;
     Item["checkPassword"]=newPasCheck;
+  if( Item["fname"]==='' || Item["lname"]==='' || 
+  Item["fname"]==='' || Item["lname"]==='' || 
+  Item["email"]==='' || Item["adress"]==='' || 
+  Item["phone"]==='' || Item["cardInfo"]==='' || 
+  Item["newPassword"]==='' || Item["checkPassword"]==='' )
+  alert("submit esuat campuri goale");
+
 
  if(newPas=== newPasCheck)
 {
