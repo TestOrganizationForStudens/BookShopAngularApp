@@ -76,8 +76,9 @@
           },
           "defaultConfiguration": "development",
           "options": {
-            "sslKey": "<relative path from angular.json>/server.key",
-            "sslCert": "<relative path from angular.json>/server.crt"
+            "sslKey": "src/environments/private.key",
+            "sslCert": "src/environments/certificate.crt"
+            
 
           }
 

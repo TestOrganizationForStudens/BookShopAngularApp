@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientModule ,HttpClient} from '@angular/common/http';
 import { sha256, sha224 } from 'js-sha256';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-signin',
@@ -9,7 +11,7 @@ import { sha256, sha224 } from 'js-sha256';
 })
 export class SigninComponent implements OnInit {
 
-  constructor(private http:HttpClient) { 
+  constructor(private http:HttpClient,private route:Router) { 
 
 
     
@@ -19,14 +21,17 @@ export class SigninComponent implements OnInit {
 
   signInMethod(Item:any)
   {
-    console.warn(Item.lname);
+   
 
     var newPas=sha256(Item["newPassword"]);
     var newPasCheck=sha256(Item["checkPassword"]);
     Item["newPassword"]=newPas;
     Item["checkPassword"]=newPasCheck;
+    console.log(Item);
 
     this.http.post(this.URL,Item);
+    alert("submit reusit");
+    this.route.navigate(['login']);
   
   }
   ngOnInit(): void {
