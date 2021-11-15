@@ -33,8 +33,7 @@ export class SigninComponent implements OnInit {
   Item["phone"]==='' || Item["cardInfo"]==='' || 
   Item["newPassword"]==='' || Item["checkPassword"]==='' )
   alert("submit esuat campuri goale");
-
-
+   else
  if(newPas=== newPasCheck)
 {
     console.log(Item);
