@@ -27,6 +27,9 @@ export class SigninComponent implements OnInit {
     var newPasCheck=sha256(Item["checkPassword"]);
     Item["newPassword"]=newPas;
     Item["checkPassword"]=newPasCheck;
+
+ if(newPas=== newPasCheck)
+{
     console.log(Item);
 
     this.http.post(this.URL,Item);
@@ -34,6 +37,9 @@ export class SigninComponent implements OnInit {
     this.route.navigate(['login']);
   
   }
+  else
+  alert("submit esuat parolele nu se potrivesc");
+}
   ngOnInit(): void {
   }
 
