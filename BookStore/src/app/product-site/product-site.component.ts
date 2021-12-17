@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../product';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClientModule,HttpClient } from '@angular/common/http';
 

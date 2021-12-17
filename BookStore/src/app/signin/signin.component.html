@@ -11,20 +11,25 @@
 <p>signin works!</p>
 <form  #newUserInfo="ngForm"  (ngSubmit)="signInMethod(newUserInfo.value)" >
  <p>First name:</p>
-<input type="text" name="fname" ngModel><br>
+<input type="text" name="firstName" ngModel><br>
 <p>Last name:</p>
-<input type="text" name="lname" ngModel><br>
+<input type="text" name="lastName" ngModel><br>
 <p>Email adress:</p>
 <input type="text" name="email"   ngModel><br>
+<p>Username:</p>
+<input type="text" name="userName"   ngModel><br>
+<p>Role:</p>
+<input type="text" name="role"   ngModel><br>
+
 <p>Adress:</p>
-<input type="text" name="adress"  ngModel><br>
+<input type="text" name="address"  ngModel><br>
 <p> Phone:</p>
 <input type="text" name="phone" ngModel><br>
  <p>card number:<p>
-<input type="text"  name="cardInfo" ngModel><br>
+<input type="text"  name="cardNumber" ngModel><br>
 
 <p>new password:<p>
-    <input type="password"  name="newPassword" ngModel><br>
+    <input type="password"  name="password" ngModel><br>
 
 <p>check password:<p>
 <input type="password"  name="checkPassword" ngModel><br>

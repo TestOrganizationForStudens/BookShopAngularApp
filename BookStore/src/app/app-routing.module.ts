@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { SigninComponent } from './signin/signin.component';
 import { PersonalAcountComponent } from './personal-acount/personal-acount.component';
 import { BuyinCartComponent } from './buyin-cart/buyin-cart.component';
+import { ProductSiteComponent } from './product-site/product-site.component';
 
 const routes: Routes = [
 {
@@ -28,6 +29,11 @@ component:HomeComponent
 {
   path:'account',
   component: PersonalAcountComponent
+},
+
+{
+  path:'product/:id',
+  component:ProductSiteComponent 
 }
 
 ];
@@ -36,4 +42,5 @@ component:HomeComponent
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+}

@@ -77,8 +77,8 @@
           "defaultConfiguration": "development",
           "options": {
             "sslKey": "src/environments/private.key",
-            "sslCert": "src/environments/certificate.crt"
-            
+            "sslCert": "src/environments/certificate.crt",
+            "ssl":true
 
           }
 

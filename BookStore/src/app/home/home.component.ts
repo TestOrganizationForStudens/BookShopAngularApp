@@ -8,21 +8,158 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
+
+
+
 export class HomeComponent  implements OnInit{
   constructor(private http:HttpClient) {}
 
    readonly URL='http://localhost:8080/api/product/';
    readonly URL2='https://jsonplaceholder.typicode.com/posts';
+   readonly URLS={0:"http://localhost:8080/api/product/findByPrice?price=",
+    1:'http://localhost:8080/api/product/findByPriceThatAreCheaper?price=',
+    2:"http://localhost:8080/api/product/findByPriceThatAreExpensive?price=",
+    3:"http://localhost:8080/api/product/publishingHouse?publishHouse=",
+    4:"http://localhost:8080/api/product/findByYear?year=",
+    5:"http://localhost:8080/api/product/findByProductName?productName=",
+    6:"http://localhost:8080/api/product/findByCategory?category=",
+    7:"http://localhost:8080/api/product/findByAuthor?author="
+}
+
+ stringToUseBase:string='http://localhost:8080/api/product/';
+ stringToUse:string='http://localhost:8080/api/product/';
  products:any;
  books:any;
  books2:any;
  logedIn:any;
   
- doImages()
+
+toProductName()
+{
+console.log("merge bine multumesc");
+this.stringToUseBase=this.URLS[5];
+
+var obj=document.getElementById("filterButton");
+
+if(obj)
+{
+ obj.style.width="100px";
+ obj.innerText="Product Name";
+
+}
+  
+
+
+
+}
+
+toCategory()
+{
+
+  console.log("merge categoria");
+  this.stringToUseBase=this.URLS[6];
+  var obj=document.getElementById("filterButton");
+
+if(obj)
+{
+ obj.style.width="100px";
+ obj.innerText="Category";
+
+}
+  
+
+}
+
+  toAuthor()
+ {
+  console.log("merge autorul");
+  this.stringToUseBase=this.URLS[7];
+  var obj=document.getElementById("filterButton");
+  if(obj)
+  {
+   obj.style.width="100px";
+   obj.innerText="Author";
+  
+  }
+
+
+
+
+ }
+   toPublish()
+  {
+    console.log("merge publish");
+    this.stringToUseBase=this.URLS[3];
+    var obj=document.getElementById("filterButton");
+    if(obj)
+    {
+     obj.style.width="130px";
+     obj.innerText="Publishing House";
+    
+    }
+  
+  }
+  toYear(){
+    console.log("merge  anul");
+    this.stringToUseBase=this.URLS[4];
+    var obj=document.getElementById("filterButton");
+    if(obj)
+    {
+     obj.style.width="100px";
+     obj.innerText="Year";
+    
+    }
+  }
+    
+
+  toPrice()
+  {
+    console.log("merge  pretul");
+    this.stringToUseBase=this.URLS[0];
+    var obj=document.getElementById("filterButton");
+    if(obj)
+    {
+     obj.style.width="100px";
+     obj.innerText="Exact Price";
+    
+    }
+  }
+   toPrice2()
+    {
+      console.log("merge  mai putin decat pretul");
+      this.stringToUseBase=this.URLS[1];
+      var obj=document.getElementById("filterButton");
+      if(obj)
+      {
+       obj.style.width="130px";
+       obj.innerText="Lower than price";
+      
+      }
+     }
+    toPrice3()
+    {
+
+      console.log("merge  mai mult decat pretul");
+      this.stringToUseBase=this.URLS[2];
+      var obj=document.getElementById("filterButton");
+      if(obj)
+      {
+       obj.style.width="130px";
+       obj.innerText="Higher than price";
+      
+      }
+    }
+
+
+
+
+
+ doImages(location:string)
   {
 
    //testing repository: "assets/books/more_books/books.json"
-    this.http.get<[]>(this.URL).subscribe(data =>{
+    this.http.get<[]>(location).subscribe(data =>{
      
    
 
@@ -58,32 +195,18 @@ export class HomeComponent  implements OnInit{
 
 */
 
-this.http.get<[]>("assets/books/more_books/books.json").subscribe(data2 =>{ 
-    this.books=data2;
-    this.books2=data;
-
    let links=[ ];
    let sources=[];
+   this.books2=data;
     for(let book of this.books2 )
     {
       //for other testing :"link","imageLink"
-     links.push("https://ro.wikipedia.org/w/index.php?search="+book["productName"]);
+      console.log(book);
+     links.push("https://localhost:4200/product/"+book['id']);
      sources.push(book["image"]);
 
     }
-    for(let book of this.books )
-    {
-      //for other testing :"link","imageLink"
-     links.push(book["link"]);
-     sources.push(book["imageLink"]);
-
-    }
-
-
-
-
-
-
+  
 
 
    for(var i = 0; i < sources.length; i++)
@@ -98,12 +221,13 @@ this.http.get<[]>("assets/books/more_books/books.json").subscribe(data2 =>{
      if(i<links.length)
      {
        let link=document.createElement("a");
-       link.setAttribute("href",links[i]);
+      link.setAttribute("href",links[i]);
   
     
      if(workDiv!=null)
      {
        link.appendChild(image);
+     
        workDiv.appendChild(link);
     
      }
@@ -131,42 +255,27 @@ this.http.get<[]>("assets/books/more_books/books.json").subscribe(data2 =>{
 
    });
 
-   this.books2=data;
-
- });
-
 }
 
  getRandomImage()
  {
 
  console.warn("I am feeling lucky");
-let length=this.books2.length+this.books.length;
+let length=this.books2.length;
 console.log(length);
+
  let index=Math.floor(Math.random() * (length) ) + 1;
 
 
 var src;
 var linkSite;
 
-if(index>this.books2.length)
-{ 
-index-=this.books2.length;
-src=this.books[index]["imageLink"];
-linkSite=this.books[index]["link"];
-}
-else
-{ 
-   
   src=this.books2[index]["image"];
-  linkSite="https://ro.wikipedia.org/w/index.php?search="+this.books2[index]["productName"];
-}
+  linkSite="https://localhost:4200/product/"+this.books2[index]["id"];
 
 
 var image=document.getElementById("luckyone");
 var link=document.getElementById("linkTolucky");
-
-
 
 if(image && link && src && linkSite)
 {
@@ -182,7 +291,7 @@ link.setAttribute("href",linkSite);
  ngOnInit()
  {
   this.logedIn=false;
-  this.doImages();
+  this.doImages(this.URL);
 
 
  }
@@ -208,23 +317,17 @@ changeImg2()
 
   searchengine(Item:any)
 {
+this.stringToUse=this.stringToUseBase+Item["search string"];
+
+console.warn(this.stringToUse);
 
 
-console.warn(Item);
 //this.http.post(this.URL,Item);
 
-let obj=this.http.get<any>( this.URL).subscribe(data=>console.log(data));
-
+this.doImages(this.stringToUse);
 
 
 
 
 }
-
-
-
-
-
-  title = 'Pizza2';
 }
-

@@ -11,6 +11,7 @@ import  {FormsModule} from '@angular/forms';
 import { BuyinCartComponent } from './buyin-cart/buyin-cart.component'
 import { InjectionToken } from '@angular/core';
 import {APP_INITIALIZER}from '@angular/core';
+import { ProductSiteComponent } from './product-site/product-site.component';
 
 
 function initializeApp(): Promise<void> {
@@ -54,7 +55,8 @@ function initializeApp(): Promise<void> {
     LoginComponent,
     SigninComponent,
     PersonalAcountComponent,
-    BuyinCartComponent
+    BuyinCartComponent,
+    ProductSiteComponent
   ],
   imports: [
     BrowserModule,
