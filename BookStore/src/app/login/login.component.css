@@ -1,0 +1,60 @@
+:host {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin: 100px 0px;
+  }
+
+input.ng-invalid, input.ng-untouched, textarea.ng-invalid, textarea.ng-untouched, select.ng-invalid, select.ng-untouched {
+    border: 1px solid #df5e5e;
+  }
+  
+  input.ng-valid, textarea.ng-valid, select.ng-valid {
+    border: 1px solid #569a39;
+  }
+  
+  mat-form-field {
+    margin: 0 0.5em;
+    width: 0.8em;
+    font-weight: normal;
+  }
+  
+  .error {
+    padding: 16px;
+    width: 300px;
+    color: white;
+    background-color: red;
+  }
+  
+  label{
+    font-size: 20px;
+  }
+
+  h3{
+    font-size: 40px;
+  }
+
+  #parag{
+    color: rgb(17, 17, 17);
+    background-color: rgb(187, 250, 201);
+  }
+
+  .input{
+      size:20px;
+  }
+
+  #divErr{
+    /*color: rgb(17, 17, 17);*/
+    color: rgb(245, 104, 174);
+  }
+
+  #submitButton{
+      background-color:  #7ce94d;
+      margin-right:40px;
+      font-size: 12px;
+  }
+
+  #cancelButton{  background-color:  #e46f9c;
+    margin-left:40px;
+    font-size: 12px;
+}

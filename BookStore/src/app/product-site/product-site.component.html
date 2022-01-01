@@ -2,8 +2,13 @@
 
 
 
-
-
+<body>
+<a routerLink="/home" routerLinkActive="active">
+<button>
+Back Home
+</button>
+</a>
+<br>
 <div style="float:left">
     <img id="image" src="#">
 </div>
@@ -18,7 +23,7 @@
 </div>
 
 <div style="float:right">
-<button style="width:140px ;height:30px">Adauga in cos</button>
+<button style="width:140px ;height:30px"(click)="addInCart()">Adauga in cos</button>
 <br>
 <button style="width:140px ;height:30px">Adauga in wishlist</button>
 <p id="price">Pret:</p>
@@ -27,5 +32,5 @@
 
 </div>
 </div>
-
+</body>
 

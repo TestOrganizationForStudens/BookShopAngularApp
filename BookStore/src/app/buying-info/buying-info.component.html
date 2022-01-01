@@ -7,34 +7,28 @@
     }
 </style>
 <body>
+    
+
 <div class="page">
-<p *ngIf="errorString" class="error">
-    {{errorString}}
-</p>
-<form  #newUserInfo="ngForm"  (ngSubmit)="signInMethod()" >
+<p>Introduceti-va datele pentru plata!</p>
+
+<form  #newUserInfo="ngForm"  (ngSubmit)="buyMethod()" >
  <p>First name:</p>
 <input type="text" name="firstName" [(ngModel)]="user.firstName"><br>
 <p>Last name:</p>
 <input type="text" name="lastName" [(ngModel)]="user.lastName"><br>
 <p>Email adress:</p>
 <input type="text" name="email"   [(ngModel)]="user.email"><br>
-<p>Username:</p>
-<input type="text" name="userName"   [(ngModel)]="user.userName"><br>
-<p>Role:</p>
-<input type="text" name="role"   ngModel><br>
 
-<p>Adress:</p>
+<p>Adress to deliver:</p>
 <input type="text" name="address"  [(ngModel)]="user.address"><br>
 <p> Phone:</p>
 <input type="text" name="phone" [(ngModel)]="user.phone"><br>
  <p>card number:<p>
 <input type="text"  name="cardNumber" [(ngModel)]="user.cardNumber"><br>
 
-<p>new password:<p>
-    <input type="password"  name="password" [(ngModel)]="user.password"><br>
 
-<p>check password:<p>
-<input type="password"  name="checkPassword" (ngModel)="user.lastName"><br>
+
 
 <input type="submit" value="submit" [disabled]="!newUserInfo.form.valid">
 

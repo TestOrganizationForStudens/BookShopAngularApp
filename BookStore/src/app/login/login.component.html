@@ -8,64 +8,86 @@ text-align:center;
 
 
 </style>
-<body>
 
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ro_RO/sdk.js#xfbml=1&version=v12.0&appId=3220700794679869&autoLogAppEvents=1" 
-nonce="NprwB65B">
-</script>
+<section class="sample-app-content">
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>LogIn page</h3>
+          <p id="parag">please enter your username and password</p>
+          <p *ngIf="errorString" class="error">
+            {{errorString}}
+          </p>
+        </div>
+      </div>
+      <form name="form" #login="ngForm" (ngSubmit) ="loginMethod()">
+        <div class="row m-0 p-0">
+          <div class="col-3 m-0 p-0">
+            <h5> <label>Username:*</label></h5>
+          </div>
+          <div class="col-3 m-0 p-0">
+            <div class="form-group">
+              <h5>
+                <input type="text" name="Username" #Username="ngModel" placeholder="username" [(ngModel)]="requestAuthentication.userName" required/>
+              </h5>
+              <div id="divErr" *ngIf="Username.pristine && Username.touched" class="alert alert-danger">
+               *Please enter username!
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="row m-0 p-0">
+          <div class="col-3 m-0 p-0">
+            <h5> <label>Password:*</label></h5>
+          </div>
+          <div class="col-8 m-0 p-0">
+            <div class="form-group">
+              <h5>
+                <input type="password" #Password="ngModel" name="Password" placeholder="password" [(ngModel)]="requestAuthentication.password" required/>
+              </h5>
+              <div id="divErr" *ngIf="Password.pristine && Password.touched" class="alert alert-danger">
+                *Please enter password!
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>
+           <!-- <input type="submit" value="submit"/>-->
+            
+          <button id="submitButton" type="submit" [disabled]="!login.valid">Submit</button>
+          <button id="cancelButton" routerLink="/">Cancel</button>
+        </p>
+      </form>
+   
+     <div id="fb-root"></div>
+      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ro_RO/sdk.js#xfbml=1&version=v12.0&appId=3220700794679869&autoLogAppEvents=1" 
+       nonce="NprwB65B">
+      </script>
+
+
+       <br>
+       <p > OR</p>
+     <div>
+
+       <button (click)="facebookLogIn()">
+        <img   height=50 width=50 padding=0px src="assets/facebook.jpg">
+        </button>
+        
+        </div>
+        <br>
+        <br>
+        <a  style="float:right" href="https://en.wikipedia.org/wiki/Password">Forgot password?</a>
+        <br>
+        <a routerLink="/sigin">
+            <input type="submit" value="sing in"/>
+        </a>
+        
+        </div>
+   
+
+  </section>
 
 
 
-<div class="content">
-<h1 >login</h1>
 
-<form #login="ngForm" (ngSubmit) ="loginMethod(login.value)">
-<p>Username</p>
-<input type="text" name="Username" placeholder="username" ngModel   required/>
-<br> <br>
-<p>Password</p>
-<input type="password" name="Password" placeholder="password" ngModel  required/>
-
-<br> <br>
- <input type="submit" value="submit"/>
- <br> 
-
-</form>
-
-<br>
-<p > OR</p>
-<div>
-
-
-
-
-<button (click)="facebookLogIn()">
-<img   height=50 width=50 padding=0px src="assets/facebook.jpg">
-</button>
-
-
-
-
-<button (click)="twitterLogIn()">
-<img height=50 width=50 padding=0px src="assets/twitter.webp">
-</button>
-
-
-<button (click)="GmailLogIn()">
-<img  height=50 width=50 padding=0px src="assets/gmail.png">
-</button>
-
-
-
-</div>
-<br>
-<br>
-<a  style="float:right" href="https://en.wikipedia.org/wiki/Password">Forgot password?</a>
-<br>
-<a routerLink="/sigin">
-    <input type="submit" value="sing in"/>
-</a>
-
-</div>
-</body>

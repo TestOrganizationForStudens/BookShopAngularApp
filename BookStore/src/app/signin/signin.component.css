@@ -1,0 +1,12 @@
+.error {
+    padding: 16px;
+    width: 300px;
+    color: white;
+    background-color: red;
+  }
+  :host {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin: 100px 0px;
+  }

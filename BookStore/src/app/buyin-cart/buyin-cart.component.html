@@ -1,26 +1,35 @@
 
-<style>
-table, th, td {
-    border: 1px solid blue;
-}
-</style>
 
-<p>buyin-cart works!</p>
+<html>
+<body>
+<p>Buying cart</p>
 
-<table>
+    <a routerLink="/home" routerLinkActive="active">
+    <button>
+    Back Home
+   </button>
+   </a>
+<table id="tableProducts">
     <tr>
+      <th>Product Id</th>
       <th>ProductName</th>
       <th>Quantity</th>
       <th>Price</th>
       <th>Total</th>
      </tr>
-     <tr>
-         <td>empty</td>
-         <td>empty</td>
-         <td>empty</td>
-         <td></td>
-     </tr>
+
+    
+
     </table>
+    <form  name="delete" #Del="ngForm" (ngSubmit)="delete_product()">
+    <button type="submit" >Delete Element</button>
+    </form>
 
-    <a ><input class="buttonContinue" type="submit" value="Finalizare date plata"> </a>
+    <form  name="modify" #Modify="ngForm" (ngSubmit)="modify_product()">
+    <button type="submit" >Modify Quantity</button>
+    </form>
+  
+  
 
+</body>
+</html>
