@@ -12,13 +12,14 @@ import { BuyinCartComponent } from './buyin-cart/buyin-cart.component'
 import { InjectionToken } from '@angular/core';
 import {APP_INITIALIZER}from '@angular/core';
 import { ProductSiteComponent } from './product-site/product-site.component';
-
-
+import { UserPageComponent } from './user-page/user-page.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { BuyingInfoComponent  } from './buying-info/buying-info.component';
+import { BuyingCartService } from './buying-cart.service';
 function initializeApp(): Promise<void> {
   var script= document.createElement('script');
    script.src="https://connect.facebook.net/en_US/sdk.js";
    document.body.appendChild(script);
-
 
   return new Promise((resolve, reject) => {
     console.log("Buna dimineata");
@@ -36,14 +37,18 @@ function initializeApp(): Promise<void> {
      // FB.getLoginStatus(function(response){console.log(response)});
   
   };
-  
-
 
    resolve();
   }
   );
 
+
+
+
+
 }
+
+
 
 
 
@@ -56,7 +61,11 @@ function initializeApp(): Promise<void> {
     SigninComponent,
     PersonalAcountComponent,
     BuyinCartComponent,
-    ProductSiteComponent
+    ProductSiteComponent,
+    UserPageComponent,
+    AdminPageComponent,
+    BuyingInfoComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -70,7 +79,10 @@ function initializeApp(): Promise<void> {
     provide: APP_INITIALIZER,
     useFactory: () => initializeApp,
     multi: true
-   }],
+   },
+
+   BuyingCartService
+],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
