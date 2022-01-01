@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,15 +10,20 @@ import { HttpClientModule } from '@angular/common/http';
 
   styles: []
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   readonly ROOT_URL='';
 
-constructor(private http:HttpClientModule){
-
-
+constructor(private http:HttpClientModule,private router:Router){
+  this.router.navigate(["/home"]);
 
 
   
 }
+ngOnInit(): void {
+
+}
+
+
+
   title = 'app';
 }

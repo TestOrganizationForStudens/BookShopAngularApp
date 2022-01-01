@@ -138,7 +138,7 @@ modify_product()
 
 }
   ngOnInit(): void {
- 
+    console.log("cart");
 /*
   this.http.get<[]>(this.URL).subscribe(data =>{
 
@@ -159,7 +159,9 @@ modify_product()
 */
 
 
+  this.printProducts();
   console.log(this.cart.products);
+
  
  }
 

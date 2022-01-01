@@ -6,6 +6,7 @@ import { Order } from '../Order';
 import { Product } from '../product';
 import { ProductSiteComponent } from '../product-site/product-site.component';
 import { User } from '../user';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -21,8 +22,8 @@ export class AdminPageComponent implements OnInit {
   private orders:any;
   private id:any;
 
-  constructor(private _Activatedroute:ActivatedRoute,private router: Router,private http:HttpClient) { }
-  readonly URL='http://localhost:8080/api/product/';
+  constructor(private userService:UsersService,private _Activatedroute:ActivatedRoute,private router: Router,private http:HttpClient) { }
+  readonly URL='http://localhost:8080/api/product/all';
   readonly URL2='http://localhost:8080/api/user/';
   readonly URL3='http://localhost:8080/api/order/';
   private clicked_line="";
@@ -113,8 +114,6 @@ printPerosnalInfo()
 
       if(this.id)
       this.http.get<[]>(this.URL2+this.id).subscribe(data =>{
-
-       
 
          let user:User;
           this.admin=data;

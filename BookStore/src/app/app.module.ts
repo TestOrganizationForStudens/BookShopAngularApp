@@ -79,9 +79,7 @@ function initializeApp(): Promise<void> {
     provide: APP_INITIALIZER,
     useFactory: () => initializeApp,
     multi: true
-   },
-
-   BuyingCartService
+   }
 ],
   bootstrap: [AppComponent]
 })

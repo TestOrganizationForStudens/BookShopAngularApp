@@ -1,80 +1,76 @@
-
 <html>
+
 <body>
 
- 
+
   <ul>
-  <li>Home Page  </li>
 
- 
-   
+    <li>
+      <a routerLink="/home" routerLinkActive="active"> Home Page </a>
+    </li>
+    <div class="pressingB">
 
-
-
-
-      <div class="pressingB">
-
-        <li style="float:right">
-          <a   class="pressingB" routerLink="/sigin"  routerLinkActive="active" >  
-           sigin
-          </a>
-            </li>
+      <li style="float:right">
+        <a class="pressingB" routerLink="/sigin" routerLinkActive="active">
+          sigin
+        </a>
+      </li>
 
 
 
-        <li style="float:right">
-      <a   class="pressingB" routerLink="/login"  routerLinkActive="active" >  
-       login
-      </a>
-        </li>
+      <li style="float:right">
+        <a class="pressingB" routerLink="/login" routerLinkActive="active">
+          login
+        </a>
+      </li>
 
 
-        <li style="float:right">
-          <a   class="pressingB" routerLink="/home"  routerLinkActive="active"  role="button" (click)="logOutFunction()" >  
-            logout
-            <!-- {{logOutFunction()}}-->
-          </a>
-            </li>
+      <li style="float:right">
+        <a class="pressingB" routerLink="/home" routerLinkActive="active" role="button" (click)="logOutFunction()">
+          logout
+          <!-- {{logOutFunction()}}-->
+        </a>
+      </li>
 
 
-<li style="float:right">
-<a   routerLink="/account" routerLinkActive="active">  
- personal profile
-</a>
-</li>
+      <li style="float:right">
+        <a routerLink="/admin" routerLinkActive="active">
+          personal profile
+        </a>
+      </li>
 
 
 
-<li style="float:right">
-<a   routerLink="/cart">  
-Buying-cart
-</a>
-</li>
-</div>
-
-
-<li>
-  <form #forSearch="ngForm" (ngSubmit)="searchengine(forSearch.value)">
-<input type="text" name="search string" ngModel/>
-<button type="submit">Search</button>
-</form>
-</li>
-
-
-  <div class="dropdown">
-    <button class="dropbtn" id="filterButton" style="width:60px">Filter</button>
-
-    <div class="dropdown-content">
-      <button style="width:140px" (click)="toProductName()"> Product Name</button>
-      <button style="width:140px"  (click)="toCategory()"> Category</button>
-      <button style="width:140px"  (click)="toAuthor()"> Author</button>
-      <button style="width:140px" (click)="toPublish()">Publishing House</button>
-      <button style="width:140px"  (click)="toYear()" > Year</button>
-      <button style="width:140px" (click)="toPrice()"> Exact Price</button>
-      <button style="width:140px"  (click)="toPrice2()"> Cheaper</button>
-      <button style="width:140px" (click)="toPrice3()"> More expansive</button>
+      <li style="float:right">
+        <a routerLink="/cart">
+          Buying-cart
+        </a>
+      </li>
     </div>
-  </div> 
+
+
+    <li>
+      <form #forSearch="ngForm" (ngSubmit)="searchengine(forSearch.value)">
+        <input type="text" name="search string" ngModel />
+        <button type="submit">Search</button>
+      </form>
+    </li>
+
+
+    <div class="dropdown">
+      <button class="dropbtn" id="filterButton" style="width:60px">Filter</button>
+
+      <div class="dropdown-content">
+        <button style="width:140px" (click)="toProductName()"> Product Name</button>
+        <button style="width:140px" (click)="toCategory()"> Category</button>
+        <button style="width:140px" (click)="toAuthor()"> Author</button>
+        <button style="width:140px" (click)="toPublish()">Publishing House</button>
+        <button style="width:140px" (click)="toYear()"> Year</button>
+        <button style="width:140px" (click)="toPrice()"> Exact Price</button>
+        <button style="width:140px" (click)="toPrice2()"> Cheaper</button>
+        <button style="width:140px" (click)="toPrice3()"> More expansive</button>
+      </div>
+    </div>
 
 
 
@@ -84,67 +80,61 @@ Buying-cart
 
 
 
-</ul>
-<br>
+  </ul>
+  <br>
 
 
 
 
 
-<div style="float:right; padding-right:150px" id="getRandom"> >
-  <form  name="lucky_book" #Lucky="ngForm" (ngSubmit)=" getRandomImage()">
-  <button name="btn" type="submit">I am feeling lucky    </button>
-  </form>
-</div>
-<br>
+  <div style="float:right; padding-right:150px" id="getRandom"> >
+    <form name="lucky_book" #Lucky="ngForm" (ngSubmit)=" getRandomImage()">
+      <button name="btn" type="submit">I am feeling lucky </button>
+    </form>
+  </div>
+  <br>
 
 
 
-<div class="row">
+  <div class="row">
 
-  
- 
-           <div class="col">
+
+
+    <div class="col">
+
+
+      <div id="mainPart" class="middle">
+
+        <img width=50px height=50px src="assets/back.png" (click)="changeImg2()" />
+        <img id="mainimg" width=700px height=500px class="center" src="assets/download.jpg" />
+        <img width=50px height=50px src="assets/next.png" (click)="changeImg()" />
+
+      </div>
+
+
+      <input type="image" id="linkTolucky"> 
+       
    
-   
-            <div id="mainPart" class="middle">
-
-              <img   width=50px height=50px  src="assets/back.png" (click)="changeImg2()"/>
-              <img  id="mainimg" width=700px   height=500px class="center"  src="assets/download.jpg"/>
-              <img  width=50px height=50px src="assets/next.png" (click)="changeImg()"/>
-
-            </div>
-
-
-             <a  id="linkTolucky">
-             <img id="luckyone">
-             </a>
-           
-
-
-
-         </div>
 
 
 
 
-</div>
+    </div>
 
 
 
-<div *ngFor="let product of products | async ">
 
-{{product |  json}} 
-
+  </div>
 
 
-</div>
-<br><br>
+  <div id="productSpace" style="padding-top:75px">
+     
 
- <div id="productSpace" style="padding-top:75px">
 
-</div>
+  </div>
+
+
 
 </body>
-</html>
 
+</html>

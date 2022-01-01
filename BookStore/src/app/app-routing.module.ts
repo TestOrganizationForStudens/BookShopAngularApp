@@ -10,12 +10,20 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { BuyingCartService } from './buying-cart.service';
 import { BuyingInfoComponent } from './buying-info/buying-info.component';
+import { AppComponent } from './app.component';
+
+
+
 
 const routes: Routes = [
 {
 path:'home',
 component:HomeComponent
 },
+{
+  path:'',
+  component:AppComponent
+  },
 {
   path: 'login',
   component: LoginComponent
@@ -60,11 +68,20 @@ component:HomeComponent
 {
   path:'buyinfo',
   component:BuyingInfoComponent
-
 }
+
+
 ];
 
+
+
+
+
+
+
+
 @NgModule({
+
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

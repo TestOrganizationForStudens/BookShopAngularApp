@@ -39,7 +39,10 @@ export class UsersService {
   }
 
   public findUserById(id: number):Observable<User> {
-    return this.http.get<User>(`${this.apiUserServiceUrl}/${id}`);
+    return this.http.get<User>(`${this.apiUserServiceUrl}/${id}`,  
+    { headers: {
+      Authorization: 'Bearer '+this.getToken()
+    }});
   }
 
   public findUserByUserName(userName: string):Observable<User> {
