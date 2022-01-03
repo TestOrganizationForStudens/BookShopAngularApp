@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../user';
 
 @Component({
@@ -8,7 +9,7 @@ import { User } from '../user';
 })
 export class BuyingInfoComponent implements OnInit {
   user: User; 
-  constructor() {
+  constructor(private router: Router) {
 
     this.user={
       id: 0, firstName: "", lastName: "", userName: "",
@@ -20,8 +21,8 @@ export class BuyingInfoComponent implements OnInit {
 
   }
   buyMethod()
-  {
-
+  { alert.bind("comanda finalizata");
+    this.router.navigate(["/"]) ;
 
   }
 }

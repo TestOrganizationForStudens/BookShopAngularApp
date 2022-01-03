@@ -42,7 +42,11 @@ export class HomeComponent implements OnInit {
 
   private readUserData(): void {
     let user = sessionStorage.getItem("user");
+   
+
+
     if (user) {
+      this.user=JSON.parse(user);
       let firstName: User = JSON.parse(user).firstName;
       let lastName: User = JSON.parse(user).lastName;
       this.displayStringFirstNameLastName = `HI, ${firstName} ${lastName}`;
@@ -99,7 +103,17 @@ export class HomeComponent implements OnInit {
       obj.innerText = "Author";
     }
   }
+  redirectUser()
+  {
+   console.log("here");
+  // if(this.user.userRole)
+  this.router.navigate(["/account/"+this.user.id]);
 
+
+
+
+
+  }
 
   toPublish() {
     console.log("merge publish");

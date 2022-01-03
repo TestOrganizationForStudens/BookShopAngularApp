@@ -6,23 +6,36 @@
 
     <div>
         
-        <p>datele per"sonale sunt aici</p>
+        <p>datele personale sunt aici</p>
 
         <p id="idAdmin"> Id </p>
+        <input id="idAdmin_inp">
         <p id="firstNameAdmin"> First Name </p>
+        <input id="firstnameAdmin_inp">
         <p id="lastNameAdmin"> Last Name </p>
+        <input id="lastNameAdmin_inp">
         <p id="usernameAdmin"> UserName</p>
+        <input id="usernameAdmin_inp">
         <p id="emailAdmin"> Email </p>
+        <input id="emailAdmin_inp">
         <p id="addressAdmin"> Address</p>
+        <input id="addressAdmin_inp">
         <p id="phoneAdmin"> Phone </p>
+        <input id="phoneAdmin_inp">
         <p id="cardAdmin"> Card Number </p>
+        <input id="cardAdmin_inp">
 
+        <button>modifica date</button>
     </div>
 
 
     <div>
 
         <p>Utilizatorii</p>
+        <div>
+            <button  (click)="modifyUser()">modifica date</button>
+            <button  (click)="deleteUser()">delete user</button>
+        </div>
 
         <table id="userTable">
             <tr>
@@ -40,10 +53,7 @@
 
         </table>
 
-        <div>
-            <button>modifica date</button>
-            <button>delete user</button>
-        </div>
+     
 
     </div>
 
@@ -54,7 +64,11 @@
 
     <div>
         <p>Comenziile</p>
-
+        <div>
+            <button>valideaza comanda</button>
+            <button (click)="modifyOrder()">modify order</button>
+            <button (click)="deleteOrder()">delete order</button>
+        </div>
         <table id="orderTable">
             <tr id="orderTitle">
                 <th>Order id</th>
@@ -66,16 +80,16 @@
             <tr> </tr>
         </table>
 
-        <div>
-            <button>valideaza comanda</button>
-            <button>modify order</button>
-            <button>delete order</button>
-        </div>
+    
     </div>
 
 
     <div>
         <p>Produsele</p>
+        <button (click)="addProduct()">add product</button>
+        <button (click)="modifyProduct()">modify product</button>
+        <button (click)="deleteProduct()">delete product</button>
+
         <div>
             <table id="productTable">
                 <tr>
@@ -94,9 +108,7 @@
                 </tr>
 
             </table>
-            <button>add product</button>
-            <button>modify product</button>
-            <button>delete product</button>
+          
         </div>
 
     </div>

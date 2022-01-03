@@ -16,11 +16,13 @@ export class BuyinCartComponent implements OnInit {
   readonly URL='http://localhost:8080/api/product/';
 
 
-  constructor(private cart:BuyingCartService, private router: Router,private http:HttpClient) { }
+  constructor(private cart:BuyingCartService, private router: Router,private http:HttpClient) {
+    
+   }
 
-
- private clicked_line="";
  private totalPrice=0;
+ private clicked_line:any;
+
  findLine(event:any)
  {
   var target=event.target;
@@ -33,6 +35,7 @@ if(parent)
 
 console.log("line that was clicked was "+ parent.id);
 this.clicked_line=parent.id;
+console.log("line that was clicked was "+ this.clicked_line);
 } 
 
  
@@ -43,24 +46,30 @@ this.clicked_line=parent.id;
 
 printProducts()
 {
-   
- var tableToUpdate=document.getElementById("tableProducts");
+
+  var tableToUpdate=<HTMLTableElement>document.getElementById("tableProducts");
+
   if(tableToUpdate)
- {  let i=0;
+ {  
+  var tableHeader=document.getElementById("Tableheader");
+  tableToUpdate.innerHTML="";
+  if(tableHeader)
+  tableToUpdate.appendChild(tableHeader);
+
+
+  let i=0;
    this.totalPrice=0;
   for(let product of this.cart.products)
   {  
 
     var line=document.createElement("tr");
+
+    line.addEventListener("click",this.findLine.bind(this));
+ 
+
     line.setAttribute("id","line"+i);
 
-     var quantity=0;
-    for(let product3 of this.cart.products)
-         {
-           if(product.id==product3.id)
-               quantity++;
-         }
-
+     var quantity=product["quantity"];
          i++;
                   
 
@@ -76,18 +85,27 @@ printProducts()
      var inp3=document.createElement("input");
      var inp4=document.createElement("input");
      var inp5=document.createElement("input");
+     
+     inp3.id="quantityField "+line.id;
 
 
-     elem1.addEventListener("click",this.findLine);
-      
-     inp1.value=product.id.toString();
-     inp2.value=product.productName;
-     inp4.value=product.price.toString();
+
+
+     inp1.value=product["product"].id.toString();
+     inp2.value=product["product"].productName;
+     inp4.value=product["product"].price.toString();
      inp3.value=quantity.toString();
-     this.totalPrice+=quantity*product.price;
-     inp5.value=(quantity*product.price).toString();
+     this.totalPrice+=quantity*product["product"].price;
+     inp5.value=(quantity*product["product"].price).toString();
 
-  
+
+     inp1.readOnly=true;
+     inp2.readOnly=true;
+     inp4.readOnly=true;
+     this.totalPrice+=quantity*product["product"].price;
+     inp5.readOnly=true;
+
+
     elem1.appendChild(inp1);
     elem2.appendChild(inp2);
     elem3.appendChild(inp3);
@@ -110,6 +128,8 @@ printProducts()
      var elem2=document.createElement("td");
      var elem3=document.createElement("td");
      var elem4=document.createElement("td");
+
+      line.id="total";
       elem1.textContent=" ";
       elem2.textContent=" ";
       elem3.textContent=" ";
@@ -126,19 +146,66 @@ printProducts()
 }
 
 
+
+
+
+
+
+
 delete_product()
 {
-console.log("delete product "+this.clicked_line);
+  console.log("delete product "+this.clicked_line);
+  this.totalPrice=0;
+  var tableToUpdate=<HTMLTableElement>document.getElementById("tableProducts");
 
+  var rowTodelete=document.getElementById(this.clicked_line);
+
+  if(tableToUpdate && rowTodelete)
+  {
+    let prodin=<HTMLInputElement>(rowTodelete.firstChild?.firstChild);
+    let prodid=parseInt(prodin.value);
+    this.cart.deleteProduct(prodid);
+    console.log("this cart:",this.cart.products);
+}
+this.printProducts();
 }
 modify_product()
 {
+
+  this.totalPrice=0;
   console.log("modify product "+this.clicked_line);
 
+  var tableToUpdate=<HTMLTableElement>document.getElementById("tableProducts");
+  var rowTodelete=document.getElementById(this.clicked_line);
+
+  if(tableToUpdate && rowTodelete)
+  {
+    let prodin=<HTMLInputElement>(rowTodelete.firstChild?.firstChild);
+    let prodid=parseInt(prodin.value);
+
+     var inp=<HTMLInputElement>document.getElementById("quantityField "+this.clicked_line);
+
+
+
+     if(inp)
+   {
+        var amount= parseInt(inp.value);
+
+        this.cart.modifyAmount(prodid,amount);
+
+   }
+
+   this.printProducts();
+
+  }
+      
+    
 
 }
   ngOnInit(): void {
     console.log("cart");
+
+
 /*
   this.http.get<[]>(this.URL).subscribe(data =>{
 

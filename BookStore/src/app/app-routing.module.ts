@@ -39,7 +39,7 @@ component:HomeComponent
   component: SigninComponent 
 },
 {
-  path:'account',
+  path:'account/:id',
   component: PersonalAcountComponent
 },
 

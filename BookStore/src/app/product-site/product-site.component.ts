@@ -17,7 +17,7 @@ export class ProductSiteComponent implements OnInit {
   id:any
   readonly URL:string='http://localhost:8080/api/product/'
 
-  constructor(private _Activatedroute:ActivatedRoute,private cart:BuyingCartService,
+  constructor(private cart:BuyingCartService,private _Activatedroute:ActivatedRoute,
     private http:HttpClient ) {
       this.product={id: 0,
         productName: " ",
@@ -36,14 +36,17 @@ export class ProductSiteComponent implements OnInit {
 addInCart()
 {
   var page=document.getElementById("body");
+  
   if(page)
     {
    var par= document.createElement("p");
-    par.textContent="products:"+this.cart.products
+
+    par.textContent="products:"+this.cart.products;
 
     }
    console.log("se adauga in cos");
    console.log(this.product);
+ 
    this.cart.addProduct(this.product);
    console.log("products:",this.cart.products);
 }
@@ -70,7 +73,7 @@ addInCart()
     var description= document.getElementById("description:");
     this.UserInfo=data;
      
-
+   this.product.id=this.id;
    this.product.productName=this.UserInfo['productName'];
    this.product.category=this.UserInfo['category'];
    this.product.author=this.UserInfo['author'];

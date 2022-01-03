@@ -18,6 +18,23 @@ li {
   
      }
   
+   li  .profile
+   {
+
+    display: block;
+    background-color:#333;
+    color:white;
+    text-align: center;
+    padding: 0px 14px;
+    text-decoration: none;
+    border:#333;;
+
+   }
+
+
+
+
+
    .pressingB :hover {
   
     background-color: rgb(22, 125, 185);
@@ -33,7 +50,7 @@ li {
   }
   #luckyImage
   {
-    display: inline-block;
+  
     width: 25%;
     padding-right:150px;
     float:top;
@@ -45,7 +62,7 @@ li {
   background-image:url('C:/Users/Sandu/git/BookShopAngularApp/BookStore/src/assets/texture_paper.jpg');
   background-size: 100%;
   
-  
+
   }
   
   .dropdown {

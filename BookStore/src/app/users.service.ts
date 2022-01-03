@@ -13,8 +13,12 @@ export class UsersService {
 
   readonly urlBase='http://localhost:8080';
   readonly apiUserServiceUrl= this.urlBase+"/api/user";
-  //private LogedInUser:User;
-  constructor(private http: HttpClient) { }
+ // private LogedInUser:User;
+  constructor(private http: HttpClient) { 
+
+
+
+  }
 
   public getUsers():Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUserServiceUrl}/all`, {

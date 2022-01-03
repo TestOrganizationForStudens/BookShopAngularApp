@@ -22,9 +22,18 @@ export class AdminPageComponent implements OnInit {
   private orders:any;
   private id:any;
 
+
+
+
+
+
+
+
+
+
   constructor(private userService:UsersService,private _Activatedroute:ActivatedRoute,private router: Router,private http:HttpClient) { }
   readonly URL='http://localhost:8080/api/product/all';
-  readonly URL2='http://localhost:8080/api/user/';
+  readonly URL2='http://localhost:8080/api/user/findById?id=';
   readonly URL3='http://localhost:8080/api/order/';
   private clicked_line="";
   ngOnInit(): void {
@@ -67,12 +76,13 @@ export class AdminPageComponent implements OnInit {
 printUsers()
 {
    var tableToUpdate=document.getElementById("userTable");
+   var j=0;
    if(tableToUpdate)
    for(let user of this.users)
    {
     var line=document.createElement("tr");
- 
-
+      line.id="userline"+j;
+        j++;
       for(let i=0;i<8;i++)
      {
       var elem=document.createElement("td");
@@ -107,6 +117,18 @@ printUsers()
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
 printPerosnalInfo()
 {
    this._Activatedroute.paramMap.subscribe(params => { 
@@ -121,49 +143,57 @@ printPerosnalInfo()
           user=this.admin;
           
 
-          var id=document.getElementById("idAdmin");
-          var first=document.getElementById("firstNameAdmin");
-          var last=document.getElementById("lastNameAdmin");
-          var username=document.getElementById("usernameAdmin");
-          var email=document.getElementById("emailAdmin");
-          var address=document.getElementById("addressAdmin");
-          var phone=document.getElementById("phoneAdmin");
-          var card=document.getElementById("cardAdmin");
+          var id=<HTMLInputElement>document.getElementById("idAdmin_inp");
+          var first=<HTMLInputElement>document.getElementById("firstNameAdmin_inp");
+          var last=<HTMLInputElement>document.getElementById("lastNameAdmin_inp");
+          var username=<HTMLInputElement>document.getElementById("usernameAdmin_inp");
+          var email=<HTMLInputElement>document.getElementById("emailAdmin_inp");
+          var address=<HTMLInputElement>document.getElementById("addressAdmin_inp");
+          var phone=<HTMLInputElement>document.getElementById("phoneAdmin_inp");
+          var card=<HTMLInputElement>document.getElementById("cardAdmin_inp");
          
       if(user)
     {
        if(id)
-       id.textContent=id.textContent+" "+user["id"].toString();
+       id.value=user["id"].toString();
 
        if(first)
-       first.textContent=first.textContent+" "+user["firstName"].toString();
+       first.value=user["firstName"].toString();
 
        if(last)
-       last.textContent=last.textContent+" "+user["lastName"].toString();
+       last.textContent=user["lastName"].toString();
       if(username)
-      username.textContent=username.textContent+" "+user["userName"].toString();
+      username.value=user["userName"].toString();
       if(email)
-      email.textContent=email.textContent+" "+user["email"].toString();
+      email.value=user["email"].toString();
        if(address)
-       address.textContent=address.textContent+" "+user["address"];
+       address.value=user["address"];
        if(phone)
-       phone.textContent=phone.textContent+" "+user["phone"].toString();
+       phone.value=user["phone"].toString();
        if(card)
-       card.textContent=card.textContent+" "+user["cardNumber"].toString();
+       card.value=user["cardNumber"].toString();
     }});   });
 
 
 }
 
 
+
+
+
+
 printOrders()
 {
    var tableToUpdate=document.getElementById("orderTable");
    var header=document.getElementById("orderTitle");
+   var j=0;
    if(tableToUpdate)
    for(let order of this.orders)
    {    
+
     var line=document.createElement("tr");
+    line.id="orderline"+j;
+    j++;
       for(let i=0;i<6;i++)
      {
         
@@ -254,10 +284,13 @@ printProducts()
   var tableToUpdate=document.getElementById("productTable");
   if(tableToUpdate)
 {
-
+  var j=0;
   for(let product of this.products)
   {
+
    var line=document.createElement("tr");
+   line.id="productline"+j;
+    j++;
 
     var elem1=document.createElement("td");
     var image=document.createElement("img");
@@ -274,7 +307,11 @@ printProducts()
      var elem=document.createElement("td");
      var inp=document.createElement("input");
      if(i==0)
-       inp.value=product["id"].toString();
+     {
+      inp.value=product["id"].toString();
+      inp.readOnly=true;
+     }
+   
      if(i==1)
         inp.value=product["category"];
      if(i==2)
@@ -301,9 +338,195 @@ printProducts()
 }
 }
 
-}}
+}
+
+findLine(event:any)
+{
+ var target=event.target;
+
+ var elem=<Element>event.target;
+ var parent=elem.parentElement?.parentElement;
+
+if(parent)
+{
+
+console.log("line that was clicked was "+ parent.id);
+this.clicked_line=parent.id;
+console.log("line that was clicked was "+ this.clicked_line);
+} 
+
+
+}
+
+
+deleteProduct()
+{
+  console.log("delete product "+this.clicked_line);
+  var tableToUpdate=<HTMLTableElement>document.getElementById("tableProducts");
+
+  var rowTodelete=document.getElementById(this.clicked_line);
+  if(tableToUpdate && rowTodelete)
+  tableToUpdate?.removeChild(<Node>rowTodelete);
+
+ for(let i in tableToUpdate.rows)
+{
+   let row=tableToUpdate.rows[i];
+   let quantity;
+   let price;
+    let k=0;
+    let cl=0;
+
+
+
+   for (let j in row.cells) 
+   {    
+      cl++;
+    
+    if(row.cells[j].tagName=="TD")
+    { 
+          if(cl==3)
+     { var inp=<HTMLInputElement>(row.cells[j].firstElementChild);
+      if(inp)
+           k=k+parseFloat(inp.value);
+   
+        console.log(row.cells[j]);
+     }
+    }
+  
+
+   }
 
 
 
 
+}
+
+}
+
+deleteOrder()
+{
+  console.log("delete product "+this.clicked_line);
+  var tableToUpdate=<HTMLTableElement>document.getElementById("orderTable");
+
+  var rowTodelete=document.getElementById(this.clicked_line);
+  if(tableToUpdate && rowTodelete)
+  tableToUpdate?.removeChild(<Node>rowTodelete);
+
+ for(let i in tableToUpdate.rows)
+{
+   let row=tableToUpdate.rows[i];
+   let quantity;
+   let price;
+    let k=0;
+    let cl=0;
+
+
+
+   for (let j in row.cells) 
+   {    
+      cl++;
+    
+    if(row.cells[j].tagName=="TD")
+    { 
+          if(cl==3)
+     { var inp=<HTMLInputElement>(row.cells[j].firstElementChild);
+      if(inp)
+           k=k+parseFloat(inp.value);
+   
+        console.log(row.cells[j]);
+     }
+    }
+  
+
+   }
+
+
+
+
+}
+
+}
+deleteUser()
+{
+  console.log("delete product "+this.clicked_line);
+  var tableToUpdate=<HTMLTableElement>document.getElementById("userTable");
+
+  var rowTodelete=document.getElementById(this.clicked_line);
+  if(tableToUpdate && rowTodelete)
+  tableToUpdate?.removeChild(<Node>rowTodelete);
+
+ for(let i in tableToUpdate.rows)
+{
+   let row=tableToUpdate.rows[i];
+   let quantity;
+   let price;
+    let k=0;
+    let cl=0;
+
+
+
+   for (let j in row.cells) 
+   {    
+      cl++;
+    
+    if(row.cells[j].tagName=="TD")
+    { 
+          if(cl==3)
+     { var inp=<HTMLInputElement>(row.cells[j].firstElementChild);
+      if(inp)
+           k=k+parseFloat(inp.value);
+   
+        console.log(row.cells[j]);
+     }
+    }
+  
+
+   }
+
+
+
+
+}
+
+}
+
+
+
+
+
+
+
+modifyProduct()
+{
+
+  console.log("modify product "+this.clicked_line);
+       
+
+}
+
+modifyUser()
+{
+
+  console.log("modify product "+this.clicked_line);
+       
+
+}
+
+modifyOrder()
+{
+
+  console.log("modify product "+this.clicked_line);
+       
+
+}
+
+
+addProduct()
+{
+
+
+
+}
+
+}
 
