@@ -16,6 +16,7 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { BuyingInfoComponent  } from './buying-info/buying-info.component';
 import { BuyingCartService } from './buying-cart.service';
+import { AddproductComponent } from './addproduct/addproduct.component';
 function initializeApp(): Promise<void> {
   var script= document.createElement('script');
    script.src="https://connect.facebook.net/en_US/sdk.js";
@@ -65,6 +66,7 @@ function initializeApp(): Promise<void> {
     UserPageComponent,
     AdminPageComponent,
     BuyingInfoComponent,
+    AddproductComponent,
     
   ],
   imports: [

@@ -1,0 +1,42 @@
+
+<body>
+    <p>addproduct works!</p>
+    <div>
+       <a routerLink="/home" routerLinkActive="active">
+          <button>
+            Back Home
+          </button>
+       </a>
+    </div>
+    <br>
+    <br>
+
+    
+        <div style="float:left ;padding-left: 20px">
+           
+            <form #addProduct (ngSubmit)="addProductMethod(addProduct)">
+            <p>Title:</p>
+            <input id="title"  name="productName" ngModel>
+            <p> Author </p>
+            <input id="author" name="author"  ngModel>
+            <p>Categorii:</p>
+            <input id="category" name="category" ngModel>
+
+            <input id="year" name="year" ngModel>
+            <p>Editura:</p>
+            <input id="publish" name="publishingHouse"  ngModel>
+            <p>Pret:</p>
+            <input id="price" name="price"  ngModel>
+            <p>image url</p>
+            <input id="image" name="image" ngModel>
+            <p>Description:</p>
+            <textarea id="description" name="description"  rows="4" cols="50" ngModel> 
+                Input a meaningful description
+            </textarea>
+
+            <input type="submit" value="Finsih add Product">  
+        </form>
+        </div>
+
+
+</body>

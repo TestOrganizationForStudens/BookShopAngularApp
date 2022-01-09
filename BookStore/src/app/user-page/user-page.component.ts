@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { updateSpreadAssignment } from 'typescript';
+import { isJSDocLinkLike, updateSpreadAssignment } from 'typescript';
 import { Order } from '../Order';
+import { Product } from '../product';
+import { ProductSiteComponent } from '../product-site/product-site.component';
 import { User } from '../user';
 import { UsersService } from '../users.service';
 
@@ -12,29 +14,24 @@ import { UsersService } from '../users.service';
   styleUrls: ['./user-page.component.css']
 })
 export class UserPageComponent implements OnInit {
-  readonly URL = 'http://localhost:8080/api/product/';
+  readonly URL = 'http://localhost:8080/api/product/all';
   readonly URL2 = 'http://localhost:8080/api/user/';
   readonly URL3 = 'http://localhost:8080/api/order/';
-  readonly URL4 = 'http://localhost:8080/api/order/findByUserData/';
+  readonly URL4 = 'http://localhost:8080/api/order/findByUserData?user=';
   constructor(private userService:UsersService,private _Activatedroute: ActivatedRoute, private router: Router, private http: HttpClient) { }
 
   private user1: any;
   private orders: any = [];
+  //lists of products
   private wishList: any;
   private recomandings: any;
   private id: any;
-  private headerDict = {
-    'Access-Control-Allow-Origin': "*" 
-  };
-  
-
-
-
 
 
 
   ngOnInit(): void {
     this.printPerosnalInfo();
+    this.makeDemoWishList();
 
 
   }
@@ -53,15 +50,8 @@ export class UserPageComponent implements OnInit {
           console.log(user);
 
 
-         let  requestOptions = {                                                                                                                                                                                 
-            headers: new HttpHeaders(this.headerDict), 
-          };
 
-          this.http.get<[]>(this.URL4 + user,{
-            headers: {
-              Authorization: 'Bearer '+this.userService.getToken()
-            }
-          }).subscribe(data => {
+          this.http.get<[]>(this.URL4 + user).subscribe(data => {
             this.orders = [];
             this.orders = data;
             let order: Order;
@@ -107,9 +97,93 @@ export class UserPageComponent implements OnInit {
 
   }
 
+  makeDemoWishList()
+{
+   this.http.get<[]>(this.URL).subscribe(data=>{
+
+            var prods=data;
+            this.wishList=[];
+              var i=0;
+            for(let prod of prods)
+         {    
+           i++;
+                if(i%10==0)
+            this.wishList.push(prod);
+
+         }
+
+        this. printWishList();
+
+   });
+
+
+}
 
 
 
+   printWishList()
+  {       console.log("wish a better life");
+      let prod:Product;
+
+      var wishdiv= document.getElementById("wish");
+
+      if(this.wishList)
+
+    for(prod of this.wishList)
+   {            
+         if(wishdiv)
+           {
+
+                         var link=document.createElement("input");
+                         link.value="/product/"+prod.id;
+                         link.id="img"+prod.id;
+                         link.addEventListener("clcik",this.findImage.bind(this));
+                         link.addEventListener("dbclick",this.passToProduct.bind(this));
+                         link.setAttribute("type","image");
+                         link.setAttribute("src",prod.image);
+                         link.setAttribute('height', '100px');
+                         link.setAttribute('width', '100px');
+                         link.setAttribute('width', '100px');
+                         link.setAttribute( "vertical-align","middle");
+                         link.setAttribute( "padding-right","20px");
+                         link.setAttribute( "padding-bottom","20px");
+                         wishdiv.appendChild(link);
+
+
+
+
+
+           }
+
+   }
+
+
+   }
+
+   passToProduct(event:any)
+   {
+    console.log("intra acolo");
+    var element= <HTMLInputElement>event.target;
+    if(element)
+    {
+  
+      var path= element.value;
+      this.router.navigate([path]);
+    }
+    
+
+   }
+   findImage(event:any)
+   {
+     console.log("intra aici");
+    var element= <HTMLInputElement>event.target;
+    if(element)
+    {
+       console.log("image passed was",element.id);
+
+
+   }
+  }
 
 
 
@@ -117,6 +191,11 @@ export class UserPageComponent implements OnInit {
     var tableToUpdate = document.getElementById("orderTable");
     var header = document.getElementById("orderTitle");
     if (tableToUpdate)
+    {
+
+
+
+    
       for (let order of this.orders) {
 
         var line = document.createElement("tr");
@@ -192,4 +271,13 @@ export class UserPageComponent implements OnInit {
       }
 
   }
+}
+
+deleteFromWishList()
+{
+
+
+
+}
+
 }

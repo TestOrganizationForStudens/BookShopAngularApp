@@ -11,6 +11,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { BuyingCartService } from './buying-cart.service';
 import { BuyingInfoComponent } from './buying-info/buying-info.component';
 import { AppComponent } from './app.component';
+import { AddproductComponent } from './addproduct/addproduct.component';
 
 
 
@@ -68,7 +69,14 @@ component:HomeComponent
 {
   path:'buyinfo',
   component:BuyingInfoComponent
+},
+{
+  path:'addproduct',
+  component:AddproductComponent
 }
+
+
+
 
 
 ];

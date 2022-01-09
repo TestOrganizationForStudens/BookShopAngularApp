@@ -52,9 +52,20 @@ printProducts()
   if(tableToUpdate)
  {  
   var tableHeader=document.getElementById("Tableheader");
+  console.log("header",tableHeader);
+  if(tableHeader)
+  { 
+   
+     tableToUpdate.appendChild(tableHeader);
+  }
+ 
   tableToUpdate.innerHTML="";
   if(tableHeader)
-  tableToUpdate.appendChild(tableHeader);
+  { 
+       console.log(tableHeader);
+     tableToUpdate.appendChild(tableHeader);
+  }
+ 
 
 
   let i=0;
@@ -204,27 +215,6 @@ modify_product()
 }
   ngOnInit(): void {
     console.log("cart");
-
-
-/*
-  this.http.get<[]>(this.URL).subscribe(data =>{
-
-    var books=data;
-    let book:Product ;
-    for(book of books)
-  {  
-
-   this.cart.products.push(book);
-  }
-  this.printProducts();
-
-
-    }
-  );
-
-  
-*/
-
 
   this.printProducts();
   console.log(this.cart.products);

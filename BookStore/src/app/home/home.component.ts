@@ -213,7 +213,7 @@ export class HomeComponent implements OnInit {
           
           link.value=links[i];
          // window.addEventListener("click",this.passToProduct.bind(this));
-          link.addEventListener("click",this.passToProduct.bind(this));
+          link.addEventListener("dblclick",this.passToProduct.bind(this));
 
 
 
@@ -248,11 +248,9 @@ export class HomeComponent implements OnInit {
   { 
     var element= <HTMLInputElement>event.target;
     if(element)
-    { if(element.value)
-      console.log("prost Gavrea "+element.value);
+    {
+  
       var path= element.value;
-     // window.location.href=path;
-    // if(this.router)
       this.router.navigate([path]);
     }
     

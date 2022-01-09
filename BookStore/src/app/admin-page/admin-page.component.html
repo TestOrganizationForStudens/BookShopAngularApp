@@ -1,6 +1,7 @@
 <body>
 
-  <a routerLink="/home" routerLinkActive="active"> Home Page </a>
+  <a routerLink="/home" routerLinkActive="active"> <button>Home Page </button> </a>
+  <button (click)="updateToDatabase()">Update Database</button>
   <h1 style="margin:auto;text-align:center;"> Admin-page</h1> 
 
 
@@ -38,7 +39,7 @@
         </div>
 
         <table id="userTable">
-            <tr>
+            <tr id="userTitle">
 
                 <th> Id </th>
                 <th> First Name </th>
@@ -92,7 +93,7 @@
 
         <div>
             <table id="productTable">
-                <tr>
+                <tr id="productTitle">
                     <th>
                         Image
                     </th>

@@ -19,7 +19,7 @@ export class AdminPageComponent implements OnInit {
   private products:any;
   private users:any;
   private admin:any;
-  private orders:any;
+  private orders:any=[];
   private id:any;
 
 
@@ -78,9 +78,17 @@ printUsers()
    var tableToUpdate=document.getElementById("userTable");
    var j=0;
    if(tableToUpdate)
+   {
+      var tableTitle=document.getElementById("userTitle");
+      tableToUpdate.innerHTML="";
+      if(tableTitle)
+      tableToUpdate.appendChild(tableTitle);
+
+
    for(let user of this.users)
    {
     var line=document.createElement("tr");
+    line.addEventListener("click",this.findLine.bind(this));
       line.id="userline"+j;
         j++;
       for(let i=0;i<8;i++)
@@ -116,12 +124,7 @@ printUsers()
 
 
 
-}
-
-
-
-
-
+}}
 
 
 
@@ -186,13 +189,22 @@ printOrders()
 {
    var tableToUpdate=document.getElementById("orderTable");
    var header=document.getElementById("orderTitle");
+
+
    var j=0;
    if(tableToUpdate)
+{ 
+   var tableTitle=document.getElementById("orderTitle");
+   tableToUpdate.innerHTML="";
+   if(tableTitle)
+   tableToUpdate.appendChild(tableTitle);
+
    for(let order of this.orders)
    {    
 
     var line=document.createElement("tr");
     line.id="orderline"+j;
+    line.addEventListener("click",this.findLine.bind(this));
     j++;
       for(let i=0;i<6;i++)
      {
@@ -201,7 +213,10 @@ printOrders()
       var inp=document.createElement("input");
 
       if(i==0)
-        inp.value=order["id"].toString();
+        {
+         inp.value=order["id"].toString();
+         inp.readOnly=true;
+        }
       if(i==1)
          inp.value=order["userData"]["userName"];
       if(i==2)
@@ -274,7 +289,7 @@ printOrders()
  }
 
 }
-
+}
 
 
 
@@ -282,13 +297,26 @@ printProducts()
 {
    console.log("print products",this.products);
   var tableToUpdate=document.getElementById("productTable");
+
+
   if(tableToUpdate)
 {
+
+   var tableTitle=document.getElementById("productTitle");
+   tableToUpdate.innerHTML="";
+   if(tableTitle)
+   tableToUpdate.appendChild(tableTitle);
+
+
+
+
+
   var j=0;
   for(let product of this.products)
   {
 
    var line=document.createElement("tr");
+   line.addEventListener("click",this.findLine.bind(this));
    line.id="productline"+j;
     j++;
 
@@ -362,7 +390,7 @@ console.log("line that was clicked was "+ this.clicked_line);
 deleteProduct()
 {
   console.log("delete product "+this.clicked_line);
-  var tableToUpdate=<HTMLTableElement>document.getElementById("tableProducts");
+  var tableToUpdate=<HTMLTableElement>document.getElementById("productTable");
 
   var rowTodelete=document.getElementById(this.clicked_line);
   if(tableToUpdate && rowTodelete)
@@ -410,90 +438,65 @@ deleteOrder()
 
   var rowTodelete=document.getElementById(this.clicked_line);
   if(tableToUpdate && rowTodelete)
-  tableToUpdate?.removeChild(<Node>rowTodelete);
+  {
 
- for(let i in tableToUpdate.rows)
-{
-   let row=tableToUpdate.rows[i];
-   let quantity;
-   let price;
-    let k=0;
-    let cl=0;
+   var elm=rowTodelete.firstElementChild;
+   if(elm){
+      var elm2=<HTMLInputElement>(elm.firstElementChild);
 
+       var id=parseInt(elm2.value);
+       var index=this.orders.findIndex((order: { id: number; })=>order.id==id);
+          console.log("orders",this.orders);
 
-
-   for (let j in row.cells) 
-   {    
-      cl++;
-    
-    if(row.cells[j].tagName=="TD")
-    { 
-          if(cl==3)
-     { var inp=<HTMLInputElement>(row.cells[j].firstElementChild);
-      if(inp)
-           k=k+parseFloat(inp.value);
-   
-        console.log(row.cells[j]);
-     }
-    }
-  
-
-   }
-
-
-
-
-}
-
-}
+            this.orders.splice(index,1);
+            console.log("orders2",this.orders);
+            this.printOrders();
+         }}
+      }
 deleteUser()
 {
-  console.log("delete product "+this.clicked_line);
+  console.log("delete user "+this.clicked_line);
   var tableToUpdate=<HTMLTableElement>document.getElementById("userTable");
 
   var rowTodelete=document.getElementById(this.clicked_line);
   if(tableToUpdate && rowTodelete)
-  tableToUpdate?.removeChild(<Node>rowTodelete);
+  {
+   var elm=rowTodelete.firstElementChild;
+   if(elm){
+      var elm2=<HTMLInputElement>(elm.firstElementChild);
 
- for(let i in tableToUpdate.rows)
-{
-   let row=tableToUpdate.rows[i];
-   let quantity;
-   let price;
-    let k=0;
-    let cl=0;
-
-
-
-   for (let j in row.cells) 
-   {    
-      cl++;
-    
-    if(row.cells[j].tagName=="TD")
-    { 
-          if(cl==3)
-     { var inp=<HTMLInputElement>(row.cells[j].firstElementChild);
-      if(inp)
-           k=k+parseFloat(inp.value);
-   
-        console.log(row.cells[j]);
-     }
-    }
-  
+       var id=parseInt(elm2.value);
+       var index=this.users.findIndex((user1: { id: number; })=>user1.id==id);
+            this.users.splice(index,1);
+            this.printUsers();
 
    }
+ 
+
+
+
+   tableToUpdate?.removeChild(<Node>rowTodelete);
+
+  }
+
+
+  
+
 
 
 
 
 }
 
+updateToDatabase()
+{
+   console.log("update the database");
+ this.http.post(this.URL,this.users);
+ this.http.post(this.URL2,this.products);
+ this.http.post(this.URL3,this.orders);
+
+
 }
-
-
-
-
-
 
 
 modifyProduct()
@@ -518,13 +521,20 @@ modifyOrder()
   console.log("modify product "+this.clicked_line);
        
 
+
+
+
+
+
+  
+
 }
 
 
 addProduct()
 {
-
-
+ console.log("add product");
+this.router.navigate(["/addproduct"]);
 
 }
 
