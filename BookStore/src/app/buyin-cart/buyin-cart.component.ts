@@ -51,7 +51,7 @@ printProducts()
 
   if(tableToUpdate)
  {  
-  var tableHeader=document.getElementById("Tableheader");
+  var tableHeader=tableToUpdate.firstChild;
   console.log("header",tableHeader);
   if(tableHeader)
   { 
