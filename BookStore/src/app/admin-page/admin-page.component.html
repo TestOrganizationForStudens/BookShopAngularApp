@@ -1,6 +1,8 @@
 <body>
 
-  <a routerLink="/home" routerLinkActive="active"> <button>Home Page </button> </a>
+    <div id="navbar">
+        <app-navbar></app-navbar>
+     </div>
   <button (click)="updateToDatabase()">Update Database</button>
   <h1 style="margin:auto;text-align:center;"> Admin-page</h1> 
 
@@ -26,7 +28,7 @@
         <p id="cardAdmin"> Card Number </p>
         <input id="cardAdmin_inp">
 
-        <button>modifica date</button>
+        <button id="mdf1" (click)="modify_admin_data()">modifica date</button>
     </div>
 
 
@@ -34,6 +36,7 @@
 
         <p>Utilizatorii</p>
         <div>
+            <button (click)="addAdmin()"> Add Admin</button>
             <button  (click)="modifyUser()">modifica date</button>
             <button  (click)="deleteUser()">delete user</button>
         </div>

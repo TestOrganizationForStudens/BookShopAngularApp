@@ -3,7 +3,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { User } from '../user';
 import { UsersService } from '../users.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BuyingCartService } from '../buying-cart.service';
 
 @Component({
@@ -19,18 +19,19 @@ export class HomeComponent implements OnInit {
   private user: User;
   ;
   displayStringFirstNameLastName: string = "Hi, Alex";
+   searchString=" ";
 
-
-  constructor(private userService: UsersService, private router: Router, private http: HttpClient) {
+  constructor(private userService: UsersService, private router: Router, private http: HttpClient,private _Activatedroute:ActivatedRoute) {
+   
+    
+   
     this.user = {
       id: 0, firstName: "", lastName: "", userName: "",
       email: "", address: "", phone: "", cardNumber: "",
       password: "", userRole: null, listOfOrder: null
     }
     this.readUserData();
-
-
-  }
+}
 
   logOutFunction(): void {
     this.userService.logOut();
@@ -58,14 +59,14 @@ export class HomeComponent implements OnInit {
   readonly URL = 'http://localhost:8080/api/product/all';
   readonly URL2 = 'https://jsonplaceholder.typicode.com/posts';
   readonly URLS = {
-    0: "http://localhost:8080/api/product/findByPrice?price=",
-    1: 'http://localhost:8080/api/product/findByPriceThatAreCheaper?price=',
-    2: "http://localhost:8080/api/product/findByPriceThatAreExpensive?price=",
-    3: "http://localhost:8080/api/product/publishingHouse?publishHouse=",
-    4: "http://localhost:8080/api/product/findByYear?year=",
-    5: "http://localhost:8080/api/product/findByProductName?productName=",
-    6: "http://localhost:8080/api/product/findByCategory?category=",
-    7: "http://localhost:8080/api/product/findByAuthor?author="
+    "0": "http://localhost:8080/api/product/findByPrice?price=",
+    "1": 'http://localhost:8080/api/product/findByPriceThatAreCheaper?price=',
+    "2": "http://localhost:8080/api/product/findByPriceThatAreExpensive?price=",
+    "3": "http://localhost:8080/api/product/publishingHouse?publishHouse=",
+    "4": "http://localhost:8080/api/product/findByYear?year=",
+    "5": "http://localhost:8080/api/product/findByProductName?productName=",
+    "6": "http://localhost:8080/api/product/findByCategory?category=",
+    "7": "http://localhost:8080/api/product/findByAuthor?author="
   }
 
   stringToUseBase: string = 'http://localhost:8080/api/product/all';
@@ -286,7 +287,53 @@ let length = this.books2.length;
 
   ngOnInit() {
     this.logedIn = false;
-    this.doImages(this.URL);
+   
+    this._Activatedroute.paramMap.subscribe(params => { 
+      var str  = params.get('search');
+      if(str)
+     { this.searchString=str;
+       console.log("string as query"+str);
+
+         var tip  = params.get('type');
+         if(tip)
+         {
+           var str2={"search string":str};
+             console.log(tip);
+             
+             if(tip=="0")
+         this.stringToUseBase=this.URLS[0];
+              else
+              if(tip=="1")
+              this.stringToUseBase=this.URLS[1];
+                   else
+                   if(tip=="2")
+                   this.stringToUseBase=this.URLS[2];
+                        else
+
+                        if(tip=="3")
+                        this.stringToUseBase=this.URLS[3];
+                             else
+                             if(tip=="4")
+                             this.stringToUseBase=this.URLS[4];
+                                  else
+                                  if(tip=="5")
+                                  this.stringToUseBase=this.URLS[5];
+                                       else
+                                       if(tip=="6")
+                                       this.stringToUseBase=this.URLS[6];
+                                            else
+                                            if(tip=="7")
+                                            this.stringToUseBase=this.URLS[7];
+
+         this.searchengine(str2);
+       
+         }
+     }else
+     this.doImages(this.URL);
+
+
+
+ });
     console.log("home");
   }
 

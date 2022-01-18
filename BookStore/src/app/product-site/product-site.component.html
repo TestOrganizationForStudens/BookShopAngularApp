@@ -1,20 +1,8 @@
 <body>
-    <div>
-    <a routerLink="/home" routerLinkActive="active">
-        <button>
-            Back Home
-        </button>
-    </a>
-    <a style="float:right" routerLink="/cart">
-        <button>
-        Buying-cart
-       </button>
-    </a>
-
-
-
-    </div>
-    <br>
+    <div id="navbar">
+        <app-navbar></app-navbar>
+        </div>
+ 
     <div style="float:left">
         <img id="image" src="#">
     </div>
@@ -31,7 +19,7 @@
         <div style="float:right">
             <button style="width:140px ;height:30px" (click)="addInCart()">Adauga in cos</button>
             <br>
-            <button style="width:140px ;height:30px">Adauga in wishlist</button>
+            <button style="width:140px ;height:30px" (click)="addInWish()">Adauga in wishlist</button>
             <p id="price">Pret:</p>
 
 

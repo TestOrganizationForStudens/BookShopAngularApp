@@ -10,6 +10,6 @@ year: number;
 price: number;
 description: string;
 image: string;
-inStore: string;
+inStore: number;
 productOrdersList: ProductOrder[];
 }

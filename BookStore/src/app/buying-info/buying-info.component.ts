@@ -16,8 +16,19 @@ export class BuyingInfoComponent implements OnInit {
       email: "", address: "", phone: "", cardNumber: "",
       password: "", userRole: null, listOfOrder: null}
    }
+  private readUserData(): void {
+      let user = sessionStorage.getItem("user");
+      if (user) {
+        this.user=JSON.parse(user);
 
+      }
+    }
+
+
+
+    
   ngOnInit(): void {
+  
 
   }
   buyMethod()

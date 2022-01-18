@@ -4,6 +4,7 @@ import { HttpClientModule,HttpClient } from '@angular/common/http';
 import {BuyingCartService} from '../buying-cart.service';
 import { Product } from '../product';
 import { CompileShallowModuleMetadata } from '@angular/compiler';
+import { WishListService } from '../wish-list.service';
 @Component({
   selector: 'app-product-site',
   templateUrl: './product-site.component.html',
@@ -17,7 +18,7 @@ export class ProductSiteComponent implements OnInit {
   id:any
   readonly URL:string='http://localhost:8080/api/product/'
 
-  constructor(private cart:BuyingCartService,private _Activatedroute:ActivatedRoute,
+  constructor(private wish:WishListService, private cart:BuyingCartService,private _Activatedroute:ActivatedRoute,
     private http:HttpClient ) {
       this.product={id: 0,
         productName: " ",
@@ -28,7 +29,7 @@ export class ProductSiteComponent implements OnInit {
         price: 1,
         description: " ",
         image: " ",
-        inStore: " ",
+        inStore:1,
         productOrdersList: []}
 
      }
@@ -50,6 +51,15 @@ addInCart()
    this.cart.addProduct(this.product);
    console.log("products:",this.cart.products);
 }
+addInWish()
+{
+    var page=document.getElementById("body");
+   console.log("se adauga in cos");
+   console.log(this.product);
+   this.wish.addProduct(this.product);
+ 
+}
+
 
 
 

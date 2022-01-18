@@ -12,7 +12,7 @@ import { BuyingCartService } from './buying-cart.service';
 import { BuyingInfoComponent } from './buying-info/buying-info.component';
 import { AppComponent } from './app.component';
 import { AddproductComponent } from './addproduct/addproduct.component';
-
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 
@@ -21,6 +21,10 @@ const routes: Routes = [
 path:'home',
 component:HomeComponent
 },
+{
+  path:'home/:search/:type',
+  component:HomeComponent
+  },
 {
   path:'',
   component:AppComponent
@@ -73,6 +77,13 @@ component:HomeComponent
 {
   path:'addproduct',
   component:AddproductComponent
+},
+{
+
+  path:'navbar',
+  component:NavbarComponent
+
+
 }
 
 

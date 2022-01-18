@@ -14,23 +14,23 @@
     
         <div style="float:left ;padding-left: 20px">
            
-            <form #addProduct (ngSubmit)="addProductMethod(addProduct)">
+            <form #addProduct1 (ngSubmit)="addProductMethod(addProduct1)">
             <p>Title:</p>
-            <input id="title"  name="productName" ngModel>
+            <input id="title"  name="productName" [(ngModel)]="product.productName">
             <p> Author </p>
-            <input id="author" name="author"  ngModel>
+            <input id="author" name="author"  [(ngModel)]="product.author">
             <p>Categorii:</p>
-            <input id="category" name="category" ngModel>
-
-            <input id="year" name="year" ngModel>
+            <input id="category" name="category" [(ngModel)]="product.category">
+            <p>Year:</p>
+            <input id="year" name="year" [(ngModel)]="product.year">
             <p>Editura:</p>
-            <input id="publish" name="publishingHouse"  ngModel>
+            <input id="publishingHouse" name="publishingHouse" [(ngModel)]="product.publishingHouse">
             <p>Pret:</p>
-            <input id="price" name="price"  ngModel>
+            <input id="price" name="price"  [(ngModel)]="product.price">
             <p>image url</p>
-            <input id="image" name="image" ngModel>
+            <input id="image" name="image" [(ngModel)]="product.image">
             <p>Description:</p>
-            <textarea id="description" name="description"  rows="4" cols="50" ngModel> 
+            <textarea id="description" name="description"  rows="4" cols="50" [(ngModel)]="product.description"> 
                 Input a meaningful description
             </textarea>
 

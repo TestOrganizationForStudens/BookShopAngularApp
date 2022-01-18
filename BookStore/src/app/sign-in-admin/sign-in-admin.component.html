@@ -1,19 +1,18 @@
 
+
 <style>
-
-
-    #page{
+    .page{
     margin:auto;
     text-align:center;
 
     }
 </style>
 <body>
-    
-<div id="navbar">
-    <app-navbar></app-navbar>
- </div>
-<div id="page">
+<title>Sign-in-admin </title>
+<button>
+<a routerLink="/home" routerLinkActive="active"> Home Page </a>
+</button>
+<div class="page">
 
 <p *ngIf="errorString" class="error">
     {{errorString}}

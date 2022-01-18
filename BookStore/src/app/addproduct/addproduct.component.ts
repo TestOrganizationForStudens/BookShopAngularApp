@@ -9,24 +9,41 @@ import { ProductSiteComponent } from '../product-site/product-site.component';
   styleUrls: ['./addproduct.component.css']
 })
 export class AddproductComponent implements OnInit {
+   product:Product;
 
-  constructor(private http:HttpClient ) { }
+  constructor(private http:HttpClient ) { 
+
+    this.product={id:0,author:"",category:"",description:"",productName:"",price:0,image:"",
+    publishingHouse:"",year:2022,inStore:1,productOrdersList:[]
+  }
+
+
+
+  }
   URL="http://localhost:8080/api/product/add/";
+
   ngOnInit(): void {
   }
 
-  addProductMethod(addProduct:any)
+  addProductMethod(addProduct1:any)
 {
 
-   let prod:Product;
-   prod=addProduct;
-  console.log(prod);
- this.http.post(this.URL,prod).subscribe( data=>
+  this.product.author=addProduct1.author.value;
+  this.product.category=addProduct1.category.value;
+  this.product.description=addProduct1.description.value;
+  this.product.productName=addProduct1.productName.value;
+  this.product.price=parseInt(addProduct1.price.value);
+  this.product.image=addProduct1.image.value;
+  this.product.publishingHouse=addProduct1.publishingHouse.value;
+  this.product.year=parseInt(addProduct1.year.value);
+  
+
+  console.log(this.product);
+this.http.post(this.URL,this.product).subscribe( data=>
 { 
   console.log("added new product");
 
-}
- );
+});
 
 }
 

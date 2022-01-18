@@ -17,6 +17,8 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { BuyingInfoComponent  } from './buying-info/buying-info.component';
 import { BuyingCartService } from './buying-cart.service';
 import { AddproductComponent } from './addproduct/addproduct.component';
+import { SignInAdminComponent } from './sign-in-admin/sign-in-admin.component';
+import { NavbarComponent } from './navbar/navbar.component';
 function initializeApp(): Promise<void> {
   var script= document.createElement('script');
    script.src="https://connect.facebook.net/en_US/sdk.js";
@@ -67,6 +69,8 @@ function initializeApp(): Promise<void> {
     AdminPageComponent,
     BuyingInfoComponent,
     AddproductComponent,
+    SignInAdminComponent,
+    NavbarComponent,
     
   ],
   imports: [

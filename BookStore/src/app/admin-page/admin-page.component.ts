@@ -21,7 +21,7 @@ export class AdminPageComponent implements OnInit {
   private admin:any;
   private orders:any=[];
   private id:any;
-
+  private update_admin=true;
 
 
 
@@ -34,9 +34,11 @@ export class AdminPageComponent implements OnInit {
   constructor(private userService:UsersService,private _Activatedroute:ActivatedRoute,private router: Router,private http:HttpClient) { }
   readonly URL='http://localhost:8080/api/product/all';
   readonly URL2='http://localhost:8080/api/user/findById?id=';
+  readonly URL4='http://localhost:8080/api/user';
   readonly URL3='http://localhost:8080/api/order/';
   private clicked_line="";
   ngOnInit(): void {
+   this.readUserData();
   this.printPerosnalInfo();
     this.http.get<[]>(this.URL).subscribe(data =>{
      
@@ -48,7 +50,7 @@ export class AdminPageComponent implements OnInit {
 
       this.printProducts();
   });
-    this.http.get<[]>(this.URL2).subscribe(data =>{
+    this.http.get<[]>(this.URL4).subscribe(data =>{
      
       var users1=data;
       let user:User ;
@@ -128,56 +130,100 @@ printUsers()
 
 
 
+private readUserData(): void {
 
 
-
+  this.admin = sessionStorage.getItem("user");
+  this.admin=JSON.parse(this.admin);
+}
 
 printPerosnalInfo()
 {
-   this._Activatedroute.paramMap.subscribe(params => { 
-      this.id = params.get('id'); 
+    
 
-      if(this.id)
-      this.http.get<[]>(this.URL2+this.id).subscribe(data =>{
-
-         let user:User;
-          this.admin=data;
-          
-          user=this.admin;
+        
+         console.log("admin:",this.admin);
+         if(this.admin){
+        
+      
           
 
           var id=<HTMLInputElement>document.getElementById("idAdmin_inp");
-          var first=<HTMLInputElement>document.getElementById("firstNameAdmin_inp");
+
+          var first=<HTMLInputElement>document.getElementById("firstnameAdmin_inp");
           var last=<HTMLInputElement>document.getElementById("lastNameAdmin_inp");
+
           var username=<HTMLInputElement>document.getElementById("usernameAdmin_inp");
           var email=<HTMLInputElement>document.getElementById("emailAdmin_inp");
           var address=<HTMLInputElement>document.getElementById("addressAdmin_inp");
           var phone=<HTMLInputElement>document.getElementById("phoneAdmin_inp");
           var card=<HTMLInputElement>document.getElementById("cardAdmin_inp");
          
-      if(user)
+      if(this.admin)
     {
-       if(id)
-       id.value=user["id"].toString();
+       console.log(" here user:",this.admin);
+     
+       if (id)
+       {
 
-       if(first)
-       first.value=user["firstName"].toString();
+         id.value =  this.admin["id"].toString();
+         id.readOnly=true;
 
-       if(last)
-       last.textContent=user["lastName"].toString();
-      if(username)
-      username.value=user["userName"].toString();
-      if(email)
-      email.value=user["email"].toString();
-       if(address)
-       address.value=user["address"];
-       if(phone)
-       phone.value=user["phone"].toString();
-       if(card)
-       card.value=user["cardNumber"].toString();
-    }});   });
+       }
+       
 
+       if (first)
+       {
+     
+       first.value  = this.admin["firstName"].toString();
+       first.readOnly=true;
 
+       }
+      
+
+       if (last)
+       {
+         last.value  =  this.admin["lastName"].toString();
+         last.readOnly=true;
+
+       }
+        
+       if (username)
+       {
+         username.value  = this.admin["userName"].toString();
+         username.readOnly=true;
+
+       }
+     
+       if (email)
+       {
+         email.value  = this.admin["email"].toString();
+         email.readOnly=true;
+
+       }
+    
+       if (address)
+       {
+
+         address.value =  this.admin["address"];
+         address.readOnly=true;
+       }
+       
+       if (phone)
+     {
+       phone.value  =  this.admin["phone"].toString();
+       phone.readOnly=true;
+
+     }
+       
+       if (card)
+       {
+         card.value  = this.admin["cardNumber"].toString();
+         card.readOnly=true;
+       }
+
+   }
+}
 }
 
 
@@ -290,8 +336,98 @@ printOrders()
 
 }
 }
+addAdmin()
+{
 
 
+
+  
+}
+modify_admin_data()
+{ 
+   
+var id=<HTMLInputElement>document.getElementById("idAdmin_inp");
+var first=<HTMLInputElement>document.getElementById("firstnameAdmin_inp");
+var last=<HTMLInputElement>document.getElementById("lastNameAdmin_inp");
+
+var username=<HTMLInputElement>document.getElementById("usernameAdmin_inp");
+var email=<HTMLInputElement>document.getElementById("emailAdmin_inp");
+var address=<HTMLInputElement>document.getElementById("addressAdmin_inp");
+var phone=<HTMLInputElement>document.getElementById("phoneAdmin_inp");
+var card=<HTMLInputElement>document.getElementById("cardAdmin_inp");
+
+   var btn=document.getElementById("mdf1");
+   if(btn)
+   if(this.update_admin)
+  {
+   btn.textContent="submit data";
+   this.update_admin=false;
+
+
+  } else
+  {
+
+    btn.textContent="modifica date";
+   this.update_admin=true;
+
+  }
+  
+  if (first)
+  {
+
+  first.value  = this.admin["firstName"].toString();
+  first.readOnly=!first.readOnly;
+
+  }
+ 
+
+  if (last)
+  {
+    last.value  =  this.admin["lastName"].toString();
+    last.readOnly=! last.readOnly;
+
+  }
+   
+  if (username)
+  {
+    username.value  = this.admin["userName"].toString();
+    username.readOnly=!username.readOnly;
+
+  }
+
+  if (email)
+  {
+    email.value  = this.admin["email"].toString();
+    email.readOnly=!email.readOnly;
+    
+
+  }
+
+  if (address)
+  {
+
+    address.value =  this.admin["address"];
+    address.readOnly=!address.readOnly;
+  }
+  
+  if (phone)
+{
+  phone.value  =  this.admin["phone"].toString();
+  phone.readOnly=!phone.readOnly;
+
+}
+  
+  if (card)
+  {
+    card.value  = this.admin["cardNumber"].toString();
+    card.readOnly=!card.readOnly;
+  }
+
+
+
+
+
+}
 
 printProducts()
 {

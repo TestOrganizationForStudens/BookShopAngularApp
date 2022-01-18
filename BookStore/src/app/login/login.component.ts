@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { UsersService } from '../users.service';
 import { RequestAuthentication } from '../RequestAuthentication';
 import { Input } from '@angular/core';
+import { WishListService } from '../wish-list.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
   requestAuthentication: RequestAuthentication;
  @Input() errorString: string="";
 
-  constructor(private http:HttpClient,private userService: UsersService ,private router:Router) {
+  constructor(private wishHelp:WishListService,private http:HttpClient,private userService: UsersService ,private router:Router) {
 
   this.requestAuthentication={
         userName:"", password:""};
@@ -44,6 +45,8 @@ export class LoginComponent implements OnInit {
     localStorage.setItem("token", resp.jwt);
     console.log(resp.jwt);
     this.getUser(auxReqAuth.userName);
+
+   this.wishHelp.wish=[];
     this.router.navigate(["/"]).then(() => {
       window.location.reload();
     });

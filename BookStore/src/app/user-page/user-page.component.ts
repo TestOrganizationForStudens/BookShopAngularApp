@@ -7,6 +7,7 @@ import { Product } from '../product';
 import { ProductSiteComponent } from '../product-site/product-site.component';
 import { User } from '../user';
 import { UsersService } from '../users.service';
+import { WishListService } from '../wish-list.service';
 
 @Component({
   selector: 'app-user-page',
@@ -18,97 +19,135 @@ export class UserPageComponent implements OnInit {
   readonly URL2 = 'http://localhost:8080/api/user/';
   readonly URL3 = 'http://localhost:8080/api/order/';
   readonly URL4 = 'http://localhost:8080/api/order/findByUserData?user=';
-  constructor(private userService:UsersService,private _Activatedroute: ActivatedRoute, private router: Router, private http: HttpClient) { }
+  constructor(private WishHelper:WishListService,private userService:UsersService,private _Activatedroute: ActivatedRoute, private router: Router, private http: HttpClient) { }
 
-  private user1: any;
+  private user: any;
   private orders: any = [];
   //lists of products
-  private wishList: any;
   private recomandings: any;
   private id: any;
+  private Clicked_wish:any;
+  private readUserData(): void {
 
+
+    this.user = sessionStorage.getItem("user");
+    this.user=JSON.parse(this.user);
+  }
 
 
   ngOnInit(): void {
+    this.readUserData();
     this.printPerosnalInfo();
     this.makeDemoWishList();
 
 
   }
   printPerosnalInfo() {
-    this._Activatedroute.paramMap.subscribe(params => {
-      this.id = params.get('id');
-
-      if (this.id)
-        this.http.get<[]>(this.URL2 + this.id).subscribe(data => {
 
 
-          let user: User;
-          this.user1 = data;
+          this.http.get<[]>(this.URL3 ).subscribe(data => {
 
-          user = this.user1;
-          console.log(user);
-
-
-
-          this.http.get<[]>(this.URL4 + user).subscribe(data => {
+            let orders1 = [];
             this.orders = [];
-            this.orders = data;
+            orders1 = data;
             let order: Order;
-            for (order of this.orders) {
-              this.orders.push(order);
 
-            }
+            for (order of orders1)
+           {
+         if(order.userData.id==this.user.id)
+         this.orders.push(order);
+
+          }
+
             this.printOrders();
           });
 
-          var id = document.getElementById("id");
-          var first = document.getElementById("prenume");
-          var last = document.getElementById("nume");
-          var username = document.getElementById("username");
-          var email = document.getElementById("email");
-          var address = document.getElementById("adresa");
-          var phone = document.getElementById("telefon");
-          var card = document.getElementById("card");
+          var id =<HTMLInputElement> document.getElementById("id_inp");
+          var first =<HTMLInputElement> document.getElementById("prenume_inp");
+          var last =<HTMLInputElement> document.getElementById("nume_inp");
+          var username =<HTMLInputElement> document.getElementById("username_inp");
+          var email =<HTMLInputElement> document.getElementById("email_inp");
+          var address =<HTMLInputElement> document.getElementById("adresa_inp");
+          var phone =<HTMLInputElement> document.getElementById("telefon_inp");
+          var card =<HTMLInputElement> document.getElementById("card_inp");
 
-          if (user) {
+          if (this.user) {
             if (id)
-              id.textContent = id.textContent + " " + user["id"].toString();
+            {
+
+              id.value =  this.user["id"].toString();
+              id.readOnly=true;
+
+            }
+            
 
             if (first)
-              first.textContent = first.textContent + " " + user["firstName"].toString();
+            {
+          
+            first.value  = this.user["firstName"].toString();
+            first.readOnly=true;
+
+            }
+           
 
             if (last)
-              last.textContent = last.textContent + " " + user["lastName"].toString();
+            {
+              last.value  =  this.user["lastName"].toString();
+              last.readOnly=true;
+
+            }
+             
             if (username)
-              username.textContent = username.textContent + " " + user["userName"].toString();
+            {
+              username.value  = this.user["userName"].toString();
+              username.readOnly=true;
+
+            }
+          
             if (email)
-              email.textContent = email.textContent + " " + user["email"].toString();
+            {
+              email.value  = this.user["email"].toString();
+              email.readOnly=true;
+
+            }
+         
             if (address)
-              address.textContent = address.textContent + " " + user["address"];
+            {
+
+              address.value =  this.user["address"];
+              address.readOnly=true;
+            }
+            
             if (phone)
-              phone.textContent = phone.textContent + " " + user["phone"].toString();
-            if (card)
-              card.textContent = card.textContent + " " + user["cardNumber"].toString();
+          {
+            phone.value  =  this.user["phone"].toString();
+            phone.readOnly=true;
+
           }
-        });
-    });
+            
+            if (card)
+            {
+              card.value  = this.user["cardNumber"].toString();
+              card.readOnly=true;
+            }
+         
+          }
+        }
+    
 
-
-  }
 
   makeDemoWishList()
 {
    this.http.get<[]>(this.URL).subscribe(data=>{
 
             var prods=data;
-            this.wishList=[];
+            //this.wishList=[];
               var i=0;
             for(let prod of prods)
          {    
            i++;
                 if(i%10==0)
-            this.wishList.push(prod);
+            this.WishHelper.addProduct(prod);
 
          }
 
@@ -127,9 +166,9 @@ export class UserPageComponent implements OnInit {
 
       var wishdiv= document.getElementById("wish");
 
-      if(this.wishList)
+      if(this.WishHelper.wish)
 
-    for(prod of this.wishList)
+    for(prod of this.WishHelper.wish)
    {            
          if(wishdiv)
            {
@@ -137,8 +176,8 @@ export class UserPageComponent implements OnInit {
                          var link=document.createElement("input");
                          link.value="/product/"+prod.id;
                          link.id="img"+prod.id;
-                         link.addEventListener("clcik",this.findImage.bind(this));
-                         link.addEventListener("dbclick",this.passToProduct.bind(this));
+                         link.addEventListener("click",this.findImage.bind(this));
+                         link.addEventListener("dblclick",this.passToProduct.bind(this));
                          link.setAttribute("type","image");
                          link.setAttribute("src",prod.image);
                          link.setAttribute('height', '100px');
@@ -178,7 +217,7 @@ export class UserPageComponent implements OnInit {
      console.log("intra aici");
     var element= <HTMLInputElement>event.target;
     if(element)
-    {
+    {  this.Clicked_wish=element.id;
        console.log("image passed was",element.id);
 
 
@@ -275,7 +314,21 @@ export class UserPageComponent implements OnInit {
 
 deleteFromWishList()
 {
+  var element;
 
+if(this.Clicked_wish)
+ element=document.getElementById(this.Clicked_wish);
+ if( element)
+ {
+
+  var parent=element.parentElement;
+  if(parent)
+{
+  parent.removeChild(element);
+
+}
+
+ }
 
 
 }

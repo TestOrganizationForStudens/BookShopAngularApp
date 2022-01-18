@@ -1,0 +1,91 @@
+
+<html>
+
+ <body>
+
+
+     <ul>
+
+       <li>
+      <a routerLink="/home" routerLinkActive="active" class="homeb"> Home Page </a>
+      </li>
+      <div class="pressingB">
+      <li style="float:right">
+        <a class="pressingB" routerLink="/sigin" routerLinkActive="active">
+          {{displayStringFirstNameLastName}}
+        </a>
+      </li>
+      <li style="float:right">
+        <a class="pressingB" routerLink="/sigin" routerLinkActive="active">
+          sigin
+        </a>
+      </li>
+
+
+
+      <li style="float:right">
+        <a class="pressingB" routerLink="/login" routerLinkActive="active">
+          login
+        </a>
+      </li>
+
+
+      <li style="float:right">
+        <a class="pressingB" routerLink="/home" routerLinkActive="active" role="button" (click)="logOutFunction()">
+          logout
+          <!-- {{logOutFunction()}}-->
+        </a>
+      </li>
+
+
+      <li style="float:right">
+      
+          <input class="profile" type="button" value="personal profile" (click)="redirectUser()">
+      </li>
+
+
+
+      <li style="float:right">
+        <a routerLink="/cart">
+          Buying-cart
+        </a>
+      </li>
+     </div>
+
+
+     <li>
+      <form #forSearch="ngForm" (ngSubmit)="searchengine(forSearch.value)">
+        <input type="text" name="search string" ngModel />
+        <button type="submit">Search</button>
+      </form>
+     </li>
+
+
+     <div class="dropdown">
+      <button class="dropbtn" id="filterButton" style="width:60px">Filter</button>
+
+      <div class="dropdown-content">
+        <button style="width:140px" (click)="toProductName()"> Product Name</button>
+        <button style="width:140px" (click)="toCategory()"> Category</button>
+        <button style="width:140px" (click)="toAuthor()"> Author</button>
+        <button style="width:140px" (click)="toPublish()">Publishing House</button>
+        <button style="width:140px" (click)="toYear()"> Year</button>
+        <button style="width:140px" (click)="toPrice()"> Exact Price</button>
+        <button style="width:140px" (click)="toPrice2()"> Cheaper</button>
+        <button style="width:140px" (click)="toPrice3()"> More expansive</button>
+      </div>
+      </div>
+
+
+
+
+
+
+
+
+
+     </ul>
+
+
+  </body>
+ </html>
