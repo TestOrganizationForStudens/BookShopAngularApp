@@ -68,6 +68,14 @@ this.products.push({product:prod,quantity:1});
   this.products.splice(index,1);
 
  }
+ totalPrice()
+ {
+   var total=0.0;
+  for(let prodW of this.products)
+  {
+   total+=prodW.quantity*prodW.product.price;
 
-
+ }
+    return total;
   }
+}
