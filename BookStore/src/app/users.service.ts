@@ -11,7 +11,7 @@ import { RequestAuthentication } from './RequestAuthentication';
 
 export class UsersService {
 
-  readonly urlBase='http://localhost:8080';
+  readonly urlBase='http://localhost:8000';
   readonly apiUserServiceUrl= this.urlBase+"/api/user";
  // private LogedInUser:User;
   constructor(private http: HttpClient) { 
@@ -32,6 +32,10 @@ export class UsersService {
     return this.http.post<User>(`${this.apiUserServiceUrl}/add`, user);
   }
 
+
+  public addAdmin(user: User, role: Role):Observable<User> {
+    return this.http.post<User>(`${this.apiUserServiceUrl}/addadmin`, user);
+  }
   public authentificationUser(requestAuthentication:RequestAuthentication): Observable<any>{
    return this.http.post(`${this.apiUserServiceUrl}/login`, requestAuthentication);
   }

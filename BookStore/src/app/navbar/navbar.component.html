@@ -7,11 +7,13 @@
      <ul>
 
        <li>
-      <a routerLink="/home" routerLinkActive="active" class="homeb"> Home Page </a>
+        <div  class="homeb">
+      <a routerLink="/home" routerLinkActive="active"> Home Page </a>
+       </div>
       </li>
       <div class="pressingB">
       <li style="float:right">
-        <a class="pressingB" routerLink="/sigin" routerLinkActive="active">
+        <a class="pressingB"  (click)="redirectUser()">
           {{displayStringFirstNameLastName}}
         </a>
       </li>

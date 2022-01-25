@@ -13,6 +13,7 @@ import { BuyingInfoComponent } from './buying-info/buying-info.component';
 import { AppComponent } from './app.component';
 import { AddproductComponent } from './addproduct/addproduct.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { SignInAdminComponent } from './sign-in-admin/sign-in-admin.component';
 
 
 
@@ -83,6 +84,11 @@ component:HomeComponent
   path:'navbar',
   component:NavbarComponent
 
+
+},
+{
+  path:'signinadmin',
+  component:SignInAdminComponent
 
 }
 

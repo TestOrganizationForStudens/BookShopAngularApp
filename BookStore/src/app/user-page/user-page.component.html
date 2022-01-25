@@ -35,6 +35,27 @@
 
 <div id="comenzi">
     <p>Comenmziile facute sunt aici</p>
+    <div class="dropdown1">
+        <button class="dropbtn1" id="filterButton2" (click)="filter_engine()" style="width:100px">Filter order</button>
+        <div class="dropdown-content1">
+            <button style="width:140px" (click)="toOrderTime()"> Date and Time</button>
+            <button style="width:140px" (click)="toOrderUsername()"> Username</button>
+            <button style="width:140px" (click)="toOrderUserName()">User Name</button>
+            <button style="width:140px" (click)="toOrderPrice()"> Exact Price</button>
+            <button style="width:140px" (click)="toOrderPrice2()"> Cheaper</button>
+            <button style="width:140px" (click)="toOrderPrice3()"> More expansive</button>
+            <button style="width:140px" (click)="toOrderProduct()"> Product Id</button>
+            <button style="width:140px" (click)="toOrderAmount()"> Exact Amount</button>
+            <button style="width:140px" (click)="toOrderAmount2()"> Less Amount</button>
+            <button style="width:140px" (click)="toOrderAmount3()"> More Amount</button>
+     
+        </div>
+       
+        </div>
+        <button id="back_Button1" (click)="backToAllOrders()">Back to all </button>
+        <input class="orderquery" id="orderquery" type="text">
+
+
     <table id="orderTable">
       <tr id="orderTitle">
           <th>Order id</th>

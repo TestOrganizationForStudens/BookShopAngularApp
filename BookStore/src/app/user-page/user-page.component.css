@@ -5,3 +5,32 @@ background-image:url("C:/Users/Sandu/git/BookShopAngularApp/BookStore/src/assets
 background-size: 100%;
 
 }
+th
+{
+    color:yellow
+
+}
+figcaption
+{
+    color:honeydew
+}
+.dropdown1 {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content1 {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    max-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  .dropdown-content1 a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown1:hover .dropdown-content1 {display: block;}
+  
+  .dropdown1:hover .dropbtn1 {background-color: #3e8e41;}
+  .orderquery{ display: none;}

@@ -15,7 +15,7 @@ export class SigninComponent implements OnInit {
   user: User; 
   role: Role;
  @Input() errorString: string="";
-  readonly URL='http://localhost:8080/api/user';
+  readonly URL='http://localhost:8000/api/user';
   constructor(private http:HttpClient,private route:Router,private userService: UsersService) { 
     this.user={
       id: 0, firstName: "", lastName: "", userName: "",

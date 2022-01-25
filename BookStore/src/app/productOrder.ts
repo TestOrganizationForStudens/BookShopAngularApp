@@ -1,8 +1,8 @@
 import { Order } from "./Order";
+import { Order2 } from "./order2";
 import { Product } from "./product";
 export interface ProductOrder{
-id: number;
-order: Order;
+order: Order2;
 product: Product;
 amount: number;
 }

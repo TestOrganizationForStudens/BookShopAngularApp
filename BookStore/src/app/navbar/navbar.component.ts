@@ -15,19 +15,19 @@ import { UsersService } from '../users.service';
 export class NavbarComponent implements OnInit {
   private user: User;
   indexSearch:number=0;
-  stringToUseBase: string = 'http://localhost:8080/api/product/all';
-  stringToUse: string = 'http://localhost:8080/api/product/all';
-  readonly URL = 'http://localhost:8080/api/product/all';
+  stringToUseBase: string = 'http://localhost:8000/api/product/all';
+  stringToUse: string = 'http://localhost:8000/api/product/all';
+  readonly URL = 'http://localhost:8000/api/product/all';
   readonly URL2 = 'https://jsonplaceholder.typicode.com/posts';
   readonly URLS = {
-    0: "http://localhost:8080/api/product/findByPrice?price=",
-    1: 'http://localhost:8080/api/product/findByPriceThatAreCheaper?price=',
-    2: "http://localhost:8080/api/product/findByPriceThatAreExpensive?price=",
-    3: "http://localhost:8080/api/product/publishingHouse?publishHouse=",
-    4: "http://localhost:8080/api/product/findByYear?year=",
-    5: "http://localhost:8080/api/product/findByProductName?productName=",
-    6: "http://localhost:8080/api/product/findByCategory?category=",
-    7: "http://localhost:8080/api/product/findByAuthor?author="
+    0: "http://localhost:8000/api/product/findByPrice?price=",
+    1: 'http://localhost:8000/api/product/findByPriceThatAreCheaper?price=',
+    2: "http://localhost:8000/api/product/findByPriceThatAreExpensive?price=",
+    3: "http://localhost:8000/api/product/publishingHouse?publishHouse=",
+    4: "http://localhost:8000/api/product/findByYear?year=",
+    5: "http://localhost:8000/api/product/findByProductName?productName=",
+    6: "http://localhost:8000/api/product/findByCategory?category=",
+    7: "http://localhost:8000/api/product/findByAuthor?author="
   }
 
 
@@ -158,8 +158,8 @@ export class NavbarComponent implements OnInit {
 
     if (user) {
       this.user=JSON.parse(user);
-      let firstName: User = JSON.parse(user).firstName;
-      let lastName: User = JSON.parse(user).lastName;
+      let firstName: User = JSON.parse(user).first_name;
+      let lastName: User = JSON.parse(user).last_name;
       this.displayStringFirstNameLastName = `HI, ${firstName} ${lastName}`;
     } else {
       this.displayStringFirstNameLastName = "";

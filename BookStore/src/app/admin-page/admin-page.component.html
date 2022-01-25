@@ -1,4 +1,4 @@
-<body>
+<body id='the_body'>
 
     <div id="navbar">
         <app-navbar></app-navbar>
@@ -37,8 +37,31 @@
         <p>Utilizatorii</p>
         <div>
             <button (click)="addAdmin()"> Add Admin</button>
-            <button  (click)="modifyUser()">modifica date</button>
-            <button  (click)="deleteUser()">delete user</button>
+            <button (click)="modifyUser()">modifica date</button>
+            <button (click)="deleteUser()">delete user</button>
+            <div class="dropdown3">
+                <button (click)="filterOrder()">Filter order</button>
+                <button class="dropbtn3" id="filterButton1"  (click)="filter_engine()" style="width:100px">Filter user</button>
+                <div class="dropdown-content3">
+                  <button style="width:140px" (click)="toOrderTime()"> Id </button>
+                  <button style="width:140px" (click)="toOrderUsername()"> First Name </button>
+                  <button style="width:140px" (click)="toOrderUserName()"> Last Name</button>
+                  <button style="width:140px" (click)="toOrderPrice()"> UserName</button>
+                  <button style="width:140px" (click)="toOrderPrice2()"> Email</button>
+                  <button style="width:140px" (click)="toOrderPrice3()"> Address</button>
+                  <button style="width:140px" (click)="toOrderProduct()"> Phone</button>
+                  <button style="width:140px" (click)="toOrderAmount()"> Card Number </button>
+                  <button style="width:140px" (click)="toOrderAmount2()"> Number Orders</button>
+                  <button style="width:140px" (click)="toOrderAmount3()"> Number Products</button>
+                  <button style="width:140px" (click)="toOrderProduct()"> More than </button>
+                  <button style="width:140px" (click)="toOrderProduct()"> Less than </button>
+
+                </div>
+                
+                </div>
+                <button id="back_Button3" (click)="backToAllUsers()">Back to all </button>
+                <input class="userquery" id="userquery" type="text">
+
         </div>
 
         <table id="userTable">
@@ -72,6 +95,32 @@
             <button>valideaza comanda</button>
             <button (click)="modifyOrder()">modify order</button>
             <button (click)="deleteOrder()">delete order</button>
+            <div class="dropdown1">
+                <button class="dropbtn1" id="filterButton2" (click)="filter_engine()" style="width:100px">Filter order</button>
+                <div class="dropdown-content1">
+                  <button style="width:140px" (click)="toOrderTime()"> Date and Time</button>
+                  <button style="width:140px" (click)="toOrderUsername()"> Username</button>
+                  <button style="width:140px" (click)="toOrderUserName()">User Name</button>
+                  <button style="width:140px" (click)="toOrderPrice()"> Exact Price</button>
+                  <button style="width:140px" (click)="toOrderPrice2()"> Cheaper</button>
+                  <button style="width:140px" (click)="toOrderPrice3()"> More expansive</button>
+                  <button style="width:140px" (click)="toOrderProduct()"> Product Id</button>
+                  <button style="width:140px" (click)="toOrderAmount()"> Exact Amount</button>
+                  <button style="width:140px" (click)="toOrderAmount2()"> Less Amount</button>
+                  <button style="width:140px" (click)="toOrderAmount3()"> More Amount</button>
+                
+             
+                </div>
+               
+                </div>
+                <input type="date" id="datePicher">
+                <button id="back_Button1" (click)="backToAllOrders()">Back to all </button>
+                <input class="orderquery" id="orderquery" type="text">
+
+
+
+
+
         </div>
         <table id="orderTable">
             <tr id="orderTitle">
@@ -92,7 +141,27 @@
         <p>Produsele</p>
         <button (click)="addProduct()">add product</button>
         <button (click)="modifyProduct()">modify product</button>
-        <button (click)="deleteProduct()">delete product</button>
+        <button (click)="deleteProduct()"> delete product</button>
+        <div class="dropdown2">
+            <button class="dropbtn2" id="filterButton3" (click)="filter_engine()" style="width:60px">Filter</button>
+      
+            <div class="dropdown-content2">
+              <button style="width:140px" (click)="toProductName()"> Product Name</button>
+              <button style="width:140px" (click)="toCategory()"> Category</button>
+              <button style="width:140px" (click)="toAuthor()"> Author</button>
+              <button style="width:140px" (click)="toPublish()">Publishing House</button>
+              <button style="width:140px" (click)="toYear()"> Year</button>
+              <button style="width:140px" (click)="toPrice()"> Exact Price</button>
+              <button style="width:140px" (click)="toPrice2()"> Cheaper</button>
+              <button style="width:140px" (click)="toPrice3()"> More expansive</button>
+            </div>
+          
+            </div>
+            <button id="back_Button2" (click)="backToAllProducts()" >Back to all </button>
+            <input  class="productquery" id="productquery" type="text">
+
+
+
 
         <div>
             <table id="productTable">

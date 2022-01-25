@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from '../product';
 import { ProductSiteComponent } from '../product-site/product-site.component';
 
@@ -11,7 +12,7 @@ import { ProductSiteComponent } from '../product-site/product-site.component';
 export class AddproductComponent implements OnInit {
    product:Product;
 
-  constructor(private http:HttpClient ) { 
+  constructor(private http:HttpClient,private router:Router ) { 
 
     this.product={id:0,author:"",category:"",description:"",productName:"",price:0,image:"",
     publishingHouse:"",year:2022,inStore:1,productOrdersList:[]
@@ -20,7 +21,7 @@ export class AddproductComponent implements OnInit {
 
 
   }
-  URL="http://localhost:8080/api/product/add/";
+  URL="http://localhost:8000/api/product/add/";
 
   ngOnInit(): void {
   }
@@ -36,12 +37,13 @@ export class AddproductComponent implements OnInit {
   this.product.image=addProduct1.image.value;
   this.product.publishingHouse=addProduct1.publishingHouse.value;
   this.product.year=parseInt(addProduct1.year.value);
-  
+  this.product.inStore=10;
 
   console.log(this.product);
 this.http.post(this.URL,this.product).subscribe( data=>
 { 
   console.log("added new product");
+  this.router.navigate(["/home"]);
 
 });
 

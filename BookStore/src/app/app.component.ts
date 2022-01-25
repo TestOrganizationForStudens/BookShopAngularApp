@@ -20,6 +20,7 @@ constructor(private http:HttpClientModule,private router:Router){
   
 }
 ngOnInit(): void {
+  this.router.navigate(["/home"]);
 
 }
 

@@ -7,10 +7,15 @@ import { UsersService } from '../users.service';
 import { RequestAuthentication } from '../RequestAuthentication';
 import { Input } from '@angular/core';
 import { WishListService } from '../wish-list.service';
+import { User } from '../user';
+import ConfettiGenerator from 'src/assets/confetti-js-master/src/confetti';
+//declare var ConfettiGenerator:any;
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
+  
 })
 export class LoginComponent implements OnInit {
 
@@ -24,9 +29,13 @@ export class LoginComponent implements OnInit {
   readonly URL='http://localhost:8080/api/user/';
   requestAuthentication: RequestAuthentication;
  @Input() errorString: string="";
-
+ private user: User;
   constructor(private wishHelp:WishListService,private http:HttpClient,private userService: UsersService ,private router:Router) {
-
+    this.user = {
+      id: 0, firstName: "", lastName: "", userName: "",
+      email: "", address: "", phone: "", cardNumber: "",
+      password: "", userRole: null, listOfOrder: null
+    }
   this.requestAuthentication={
         userName:"", password:""};
 
@@ -43,13 +52,14 @@ export class LoginComponent implements OnInit {
   
   this.userService.authentificationUser(auxReqAuth).subscribe(resp=>{
     localStorage.setItem("token", resp.jwt);
-    console.log(resp.jwt);
+    console.log("jwt:",resp.jwt);
     this.getUser(auxReqAuth.userName);
+    alert("Logare Reusita");
+    this.make_confetti();
+  // this.wishHelp.wish=[];
+    //this.router.navigate(["/home"]).then(() => {
+   //  window.location.reload();});
 
-   this.wishHelp.wish=[];
-    this.router.navigate(["/"]).then(() => {
-      window.location.reload();
-    });
     }, err=>{
     this.errorString=err.error;
     console.log(err);
@@ -64,8 +74,21 @@ export class LoginComponent implements OnInit {
 }
 facebookLogIn()
 {
+FB.getLoginStatus(response=>{
+if(response.status==='connected')
+{
+FB.api("/me?fields=name,id,email",function(response){
   
-  return new Promise<fb.StatusResponse>(resolve => FB.login(resolve));
+  let obj:any=response;
+  console.log(obj["name"])})
+
+
+}
+else
+FB.login( response=>console.log(response));
+
+});
+
 
 }
 
@@ -74,7 +97,9 @@ facebookLogIn()
  getUser(userName: string){
   this.userService.findUserByUserName(userName).subscribe(
     resp=>{
+
       sessionStorage.setItem("user", JSON.stringify(resp));
+          console.log(JSON.stringify(resp),"session:",sessionStorage);
     },
       err=>console.log(err)
   );
@@ -84,7 +109,31 @@ facebookLogIn()
     userName:"", password:""}
 }
 
+make_confetti(){
+  console.log("confetti")
+  var canvas=document.createElement("canvas");
+  var h1=document.createElement("h1");
+  h1.innerText="Thank you for logging in!";
+
+  canvas.id="my-canvas";
+  var conf=document.getElementById("confetti");
+ 
+ if(conf)
+ {
+   console.log("here");
+  conf.appendChild(canvas);
+  var confettiSettings = { target:canvas 
+             ,  width:500,height:100};
+  var confeti=ConfettiGenerator(confettiSettings);
+  confeti.render();
+  conf.appendChild(h1);
+
+ }
 
 
 
 }
+
+}
+
+

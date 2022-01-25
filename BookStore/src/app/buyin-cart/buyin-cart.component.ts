@@ -13,7 +13,7 @@ import { ProductSiteComponent } from '../product-site/product-site.component';
 export class BuyinCartComponent implements OnInit {
  
 
-  readonly URL='http://localhost:8080/api/product/';
+  readonly URL='http://localhost:8000/api/product/';
 
 
   constructor(private cart:BuyingCartService, private router: Router,private http:HttpClient) {
@@ -80,7 +80,7 @@ printProducts()
 
     line.setAttribute("id","line"+i);
 
-     var quantity=product["quantity"];
+     
          i++;
                   
 
@@ -101,11 +101,14 @@ printProducts()
 
 
 
-
+     var quantity=product["quantity"];
      inp1.value=product["product"].id.toString();
      inp2.value=product["product"].productName;
      inp4.value=product["product"].price.toString();
      inp3.value=quantity.toString();
+
+
+
      this.totalPrice+=quantity*product["product"].price;
      inp5.value=(quantity*product["product"].price).toString();
 
@@ -113,7 +116,6 @@ printProducts()
      inp1.readOnly=true;
      inp2.readOnly=true;
      inp4.readOnly=true;
-     this.totalPrice+=quantity*product["product"].price;
      inp5.readOnly=true;
 
 

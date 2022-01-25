@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
     "@types/facebook-js-sdk": "^3.3.5",
+    "confetti-js": "^0.0.18",
     "crypto": "^1.0.1",
     "js-sha256": "^0.9.0",
     "polyfill": "^0.1.0",
@@ -27,7 +28,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~13.0.1",
+    "@angular-devkit/build-angular": "^13.1.4",
     "@angular/cli": "~13.0.1",
     "@angular/compiler-cli": "~13.0.0",
     "@types/jasmine": "~3.10.0",

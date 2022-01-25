@@ -5,6 +5,7 @@ import { User } from '../user';
 import { UsersService } from '../users.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BuyingCartService } from '../buying-cart.service';
+import { findConfigFile } from 'typescript';
 
 @Component({
   selector: 'app-home',
@@ -48,29 +49,29 @@ export class HomeComponent implements OnInit {
 
     if (user) {
       this.user=JSON.parse(user);
-      let firstName: User = JSON.parse(user).firstName;
-      let lastName: User = JSON.parse(user).lastName;
+      var firstName = JSON.parse(user).first_name;
+      var lastName = JSON.parse(user).last_name;
       this.displayStringFirstNameLastName = `HI, ${firstName} ${lastName}`;
     } else {
       this.displayStringFirstNameLastName = "";
     }
   }
 
-  readonly URL = 'http://localhost:8080/api/product/all';
+  readonly URL = 'http://localhost:8000/api/product/all';
   readonly URL2 = 'https://jsonplaceholder.typicode.com/posts';
   readonly URLS = {
-    "0": "http://localhost:8080/api/product/findByPrice?price=",
-    "1": 'http://localhost:8080/api/product/findByPriceThatAreCheaper?price=',
-    "2": "http://localhost:8080/api/product/findByPriceThatAreExpensive?price=",
-    "3": "http://localhost:8080/api/product/publishingHouse?publishHouse=",
-    "4": "http://localhost:8080/api/product/findByYear?year=",
-    "5": "http://localhost:8080/api/product/findByProductName?productName=",
-    "6": "http://localhost:8080/api/product/findByCategory?category=",
-    "7": "http://localhost:8080/api/product/findByAuthor?author="
+    "0": "http://localhost:8000/api/product/findByPrice?price=",
+    "1": 'http://localhost:8000/api/product/findByPriceThatAreCheaper?price=',
+    "2": "http://localhost:8000/api/product/findByPriceThatAreExpensive?price=",
+    "3": "http://localhost:8000/api/product/publishingHouse?publishHouse=",
+    "4": "http://localhost:8000/api/product/findByYear?year=",
+    "5": "http://localhost:8000/api/product/findByProductName?productName=",
+    "6": "http://localhost:8000/api/product/findByCategory?category=",
+    "7": "http://localhost:8000/api/product/findByAuthor?author="
   }
 
-  stringToUseBase: string = 'http://localhost:8080/api/product/all';
-  stringToUse: string = 'http://localhost:8080/api/product/all';
+  stringToUseBase: string = 'http://localhost:8000/api/product/all';
+  stringToUse: string = 'http://localhost:8000/api/product/all';
   products: any;
   books: any;
   books2: any;
@@ -175,9 +176,12 @@ export class HomeComponent implements OnInit {
       }
     }
     ).subscribe(data => {
+    
+
+
       var workDiv = document.getElementById("productSpace");
       var sheet = document.createElement('style');
-      sheet.innerHTML = "#productSpace.input{width:100px,height:100px} #productSpace{margin:auto}  #productSpace input {display: inline; vertical-align: middle;padding-right: 20px;padding-bottom: 20px;}";
+      sheet.innerHTML = " figcaption { word-break:break-all} figure { display: inline-block; ;padding-bottom: 20px;width:100px} ";
       document.body.appendChild(sheet);
       let messageForProdcuts = document.createElement("p");
 
@@ -191,17 +195,21 @@ export class HomeComponent implements OnInit {
 
       let links = [];
       let sources = [];
+      let caption=[];
       this.books2 = data;
+      console.log(this.books2);
       for (let book of this.books2) {
         // console.log(book);
           //"
-        links.push("/product/" + book['id']);
+        links.push("/product/" + book['id_product']);
         sources.push(book["image"]);
+        caption.push(book["product_name"]);
       }
 
       for (var i = 0; i < sources.length; i++) {
        
         if (i < links.length) {
+          let fig= document.createElement("figure");
           let link = document.createElement("input");
           link.setAttribute("type","image");
           link.setAttribute("src",sources[i]);
@@ -215,12 +223,15 @@ export class HomeComponent implements OnInit {
           link.value=links[i];
          // window.addEventListener("click",this.passToProduct.bind(this));
           link.addEventListener("dblclick",this.passToProduct.bind(this));
-
-
-
+          let figcaption=document.createElement("figcaption");
+          figcaption.innerText=caption[i];
+          fig.appendChild(link);
+          fig.appendChild(figcaption);
           if (workDiv != null) {
-        
-            workDiv.appendChild(link);
+            
+
+
+            workDiv.appendChild(fig);
           }
         } else {
           if (workDiv != null) {
@@ -237,11 +248,11 @@ export class HomeComponent implements OnInit {
           }
         }
 
-        if ((i + 1) % 10 == 0) {
-          var br = document.createElement("br");
-          if (workDiv != null)
-            workDiv.appendChild(br);
-        }
+       // if ((i + 1) % 12 == 0) {
+        //  var br = document.createElement("br");
+        //  if (workDiv != null)
+      //      workDiv.appendChild(br);
+      //  }
       }
     });
   }
@@ -261,17 +272,25 @@ export class HomeComponent implements OnInit {
   getRandomImage() {
     console.warn("I am feeling lucky");
 
-let length = this.books2.length;
+    let length = this.books2.length-1;
     console.log(length);
-    let index = Math.floor(Math.random() * (length)) + 1;
+    let index = Math.floor(Math.random() * (length)+1) ;
+    console.log(index);
     var src;
     var linkSite;
-    src = this.books2[index]["image"];
-    linkSite = "/product/" + this.books2[index]["id"];
+    var caption;
+    
 
+
+    caption=this.books2[index]["product_name"];
+    src = this.books2[index]["image"];
+    linkSite = "/product/" + this.books2[index]["id_product"];
+ 
     let link = <HTMLInputElement> document.getElementById("linkTolucky");
+    let figcap = <HTMLInputElement> document.getElementById("figcap");
     if(link)
     {
+
        link.setAttribute("src",src);
        link.setAttribute('height', '200px');
        link.setAttribute('width', '120px');
@@ -280,8 +299,10 @@ let length = this.books2.length;
        link.addEventListener("click",this.passToProduct.bind(this));
 
     }
-    
-
+   if(figcap)
+  {
+    figcap.innerText=caption;
+  }
   
   }
 

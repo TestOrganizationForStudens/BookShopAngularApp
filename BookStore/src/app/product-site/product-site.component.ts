@@ -16,7 +16,7 @@ export class ProductSiteComponent implements OnInit {
   product:Product
 
   id:any
-  readonly URL:string='http://localhost:8080/api/product/'
+  readonly URL:string='http://localhost:8000/api/product/'
 
   constructor(private wish:WishListService, private cart:BuyingCartService,private _Activatedroute:ActivatedRoute,
     private http:HttpClient ) {
@@ -84,10 +84,10 @@ addInWish()
     this.UserInfo=data;
      
    this.product.id=this.id;
-   this.product.productName=this.UserInfo['productName'];
+   this.product.productName=this.UserInfo['product_name'];
    this.product.category=this.UserInfo['category'];
    this.product.author=this.UserInfo['author'];
-   this.product.publishingHouse=this.UserInfo["productName"];
+   this.product.publishingHouse=this.UserInfo["publishing_house"];
    this.product.year=this.UserInfo["year"];
    this.product.price=this.UserInfo["price"];
    this.product.description=this.UserInfo["description"];
@@ -96,7 +96,7 @@ addInWish()
 
      if(title)
     {
-      title.innerText=this.UserInfo["productName"];
+      title.innerText=this.UserInfo["product_name"];
     }
     if(author)
     {
@@ -113,7 +113,7 @@ addInWish()
     }
     if(publish)
     {
-      publish.innerText="Editura:" + this.UserInfo["publishingHouse"];
+      publish.innerText="Editura:" + this.UserInfo["publishing_house"];
     }
     if(price)
     {

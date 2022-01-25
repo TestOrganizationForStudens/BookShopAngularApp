@@ -31,7 +31,7 @@ export class SignInAdminComponent implements OnInit {
   signInMethod()
   {
     this.user.password=sha256(this.user.password);
-    this.userService.addUsers(this.user, this.role).subscribe(
+    this.userService.addAdmin(this.user, this.role).subscribe(
       resp=>console.log(resp),
       err=>{
         this.errorString=err.error

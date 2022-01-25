@@ -37,7 +37,6 @@ function initializeApp(): Promise<void> {
       });
       console.log("merge");
 
-     // FB.getLoginStatus(function(response){console.log(response)});
   
   };
 
@@ -71,6 +70,7 @@ function initializeApp(): Promise<void> {
     AddproductComponent,
     SignInAdminComponent,
     NavbarComponent,
+
     
   ],
   imports: [
